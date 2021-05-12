@@ -1,0 +1,41 @@
+{
+  "vragen": [
+    {
+      "type": "oplijsting",
+      "vraag": "Welke ingredienten heb je nodig voor een cake?",
+      "antwoorden": [
+        [
+          "eieren",
+          "ei"
+        ],
+        [
+          "bloem"
+        ],
+        [
+          "suiker"
+        ],
+        [
+          "boter"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Beschrijf de tweede wereld oorlog.",
+      "antwoorden": [
+        [
+          "1940"
+        ],
+        [
+          "1945"
+        ],
+        [
+          "Duisters"
+        ],
+        [
+          "Gealieerden"
+        ]
+      ]
+    }
+  ]
+}

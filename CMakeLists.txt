@@ -3,4 +3,8 @@ project(TA_groep)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(TA_groep main.cpp)
+set(SOURCE_FILES
+        json.hpp
+        main.cpp)
+
+add_executable(TA_groep ${SOURCE_FILES})
