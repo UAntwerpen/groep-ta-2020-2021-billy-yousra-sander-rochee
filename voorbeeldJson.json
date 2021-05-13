@@ -2,7 +2,7 @@
   "vragen": [
     {
       "type": "oplijsting",
-      "vraag": "Welke ingredienten heb je nodig voor een cake?",
+      "vraag": "Welke 4 hoofdingredienten heb je nodig voor een cake?",
       "antwoorden": [
         [
           "eieren",
@@ -37,6 +37,78 @@
         ],
         [
           "Geallieerden"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 grootste landen van Asië?",
+      "antwoorden": [
+        [
+          "Rusland"
+        ],
+        [
+          "India"
+        ],
+        [
+          "China"
+        ],
+        [
+          "Kazachstan"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Uit welke 3 elementaire deeltjes is een atoom opgebouwd",
+      "antwoorden": [
+        [
+          "elektron",
+          "elektronen"
+        ],
+        [
+          "proton",
+          "protonen"
+        ],
+        [
+          "neutron",
+          "neutronen"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Geef de 4 kleinste landen ter wereld.",
+      "antwoorden": [
+        [
+          "Vaticaanstad"
+        ],
+        [
+          "Tuvalu"
+        ],
+        [
+          "Monaco"
+        ],
+        [
+          "Nauru"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Geef de 4 meest gesproken talen.",
+      "antwoorden": [
+        [
+          "Chinees"
+        ],
+        [
+          "Engels"
+        ],
+        [
+          "Spaans"
+        ],
+        [
+          "Arabisch"
         ]
       ]
     }
