@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES
         json.hpp
-        main.cpp Vragen.cpp Vragen.h)
+        main.cpp Vraag.cpp Vraag.h Quiz.cpp Quiz.h)
 
 add_executable(TA_groep ${SOURCE_FILES})
