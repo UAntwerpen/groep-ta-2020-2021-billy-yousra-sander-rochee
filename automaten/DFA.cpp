@@ -631,6 +631,12 @@ RE DFA::toRE() {
     return re;
 }
 
+void DFA::rename() {
+    for (int i = 0; i < states.size(); ++i) {
+        states[i]->name = to_string(i);
+    }
+}
+
 //-------------------------------------------------------------------
 // Bellow is the original createTable code using an array of strings
 //-------------------------------------------------------------------

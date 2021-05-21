@@ -16,6 +16,10 @@ using namespace std;
  */
 class reNode {
 public:
+    char fullAlphabet = '~';
+
+    static reNode* createReNode(string regexStr, char eps);
+
     virtual ~reNode() {};
     virtual bool accepts(string& iStr) const = 0;
     virtual vector<State*> toENFA(vector<State*>& states) const = 0;
@@ -27,6 +31,9 @@ public:
  * Consists of different nodes representing different regex operations
  */
 class RE {
+public:
+    string alphabetLoop();
+    void textAlphabet();
 protected:
     char epsilon;
     set<char> alphabet;
@@ -34,6 +41,7 @@ protected:
 public:
     // Constructor and destructor
     RE(string regex, char eps);
+    RE(string regex);
     ~RE();
     // Checks if string is recognized by the RE
     virtual bool accepts(string iStr) const;
