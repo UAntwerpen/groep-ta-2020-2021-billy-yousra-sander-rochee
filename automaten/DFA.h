@@ -57,6 +57,8 @@ public:
     bool operator== (DFA& check);
 
     RE toRE();
+
+    void rename();
 };
 
 

@@ -12,7 +12,7 @@
  * @param eps:      Chosen epsilon character
  * @return          Pointer to starting node
  */
-reNode* createReNode(string regexStr, char eps) {
+reNode* reNode::createReNode(string regexStr, char eps) {
     reNode* re = nullptr;
 
     // Bool representing whether there is a union outside of the brackets
@@ -44,6 +44,7 @@ reNode* createReNode(string regexStr, char eps) {
         }
         // Check whether outside brackets must be removed
         if (remove && regexStr[0] == '(' && regexStr[regexStr.size() - 1] == ')')
+            // Delete outside brackets
             regexStr = regexStr.substr(1, regexStr.size() - 2);
         while (!brackets.empty()) // Make sure stack is empty
             brackets.pop();
@@ -107,7 +108,18 @@ RE::RE(string regex, char eps) {
         if (c != '(' && c != ')' && c != eps && c != '+' && c != '*')
             alphabet.insert(c);
     }
-    re = createReNode(regex, eps);
+    re = reNode::createReNode(regex, eps);
+}
+
+/**
+ * Creates a regex to recognise a word in a text
+ * @param regex
+ */
+RE::RE(string regex) {
+    textAlphabet();
+    string loopStr = alphabetLoop();
+    string reStr = loopStr + regex + loopStr;
+    re = reNode::createReNode(reStr, epsilon);
 }
 
 RE::~RE() {
@@ -170,6 +182,26 @@ void RE::print() const {
     cout << endl;
 }
 
+string RE::alphabetLoop() {
+    string loop = "(";
+//    for (char c : alphabet) {
+//        loop.push_back(c);
+//        loop += "+";
+//    }
+//    loop += epsilon;
+    loop += "~";
+    loop += ")*";
+
+    return loop;
+}
+
+void RE::textAlphabet() {
+    for (char c = 97; c <= 122; ++c) {
+        alphabet.insert(c);
+    }
+    epsilon = '#';
+}
+
 //----------------------//
 // Character Node Class //
 //----------------------//
@@ -193,8 +225,11 @@ charNode::charNode(string &iStr, char eps) {
  */
 bool charNode::accepts(string& iStr) const {
     // Check whether string == character
-    if (iStr.size() == 1)
+    if (iStr.size() == 1) {
+        if (c == fullAlphabet)
+            return true;
         return iStr[0] == c;
+    }
     // If empty input string
     if (iStr.size() == 0)
         // Check whether node character == epsilon character
@@ -213,7 +248,12 @@ vector<State *> charNode::toENFA(vector<State *>& states) const {
     State* eState = new State("accept", true, false);
     // Two states with transition on character
     states.push_back(sState); states.push_back(eState);
-    sState->transitions.insert(pair<char, vector<State*>>(c, vector<State*>{eState}));
+    if (c == fullAlphabet) {
+        for (int i = 97; i <= 122; ++i) {
+            sState->transitions.insert(pair<char, vector<State*>>(i, vector<State*>{eState}));
+        }
+    } else
+        sState->transitions.insert(pair<char, vector<State*>>(c, vector<State*>{eState}));
     return vector<State*>{sState, eState};
 }
 
