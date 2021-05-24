@@ -41,6 +41,7 @@ public:
 
     /**
      * deze functie start in het begin
+     * Van hieruit kan je de mode kiezen die je wil spelen
      */
     void selectGame();
 

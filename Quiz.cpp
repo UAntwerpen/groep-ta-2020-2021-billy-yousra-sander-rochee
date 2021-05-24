@@ -146,11 +146,11 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
 
         //index waarde voor 1 vraag
         int index = randomTime % r.size();
-        cout << "element to remove: " << r[index] << endl;
+        cout << "element to remove: " << r[index] << endl << "before removal: ";
         for(auto in : r) {
             cout << in << " ";
         }
-        cout << endl;
+        cout << endl << "after removal: ";
         r.erase(r.begin()+index);
         for(auto in : r) {
             cout << in << " ";
