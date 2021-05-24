@@ -5,9 +5,6 @@
 #include "Quiz.h"
 #include "Vraag.h"
 
-#include <cstring>
-#include <sstream>
-
 Quiz::Quiz(string filename) {
 // inlezen uit file
     std::ifstream input(filename);
@@ -78,7 +75,8 @@ void Quiz::selectGame() {
     string mode;
 
     cout << "Geef de mode die je wilt spelen op: ";
-    getline(cin,mode);
+    //getline(cin,mode);
+    mode = "classic 7";
 
     //zorg ervoor dat eventuele spaties in het begin er worden uitgehaald
     int k = 0;
@@ -124,4 +122,19 @@ void Quiz::selectGame() {
 void Quiz::classicMode(const int aantal) {
     cout << "called" << endl;
 
+    //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
+    //later kunnen we dan een willekeurige indexwaarde genereren en daarmee een vraag opvragen
+    //aangezien het een set is, kunnen we ook eenvoudig deze waarde verwijderen zodat je in één quiz nooit tweemaal dezelfde vraag krijgt
+    set<int> s;
+    for(int i = 0; i < vragen.size(); i++) {
+        s.insert(i);
+    }
+
+    //het spelen zelf:
+    for(int n = 0; n < aantal; n++) {
+
+
+        auto pt = s.begin();
+        int vraagNr = *pt;
+    }
 }

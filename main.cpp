@@ -3,7 +3,6 @@
 #include "json.hpp"
 #include "Vraag.h"
 #include "Quiz.h"
-#include "ctime"
 
 #include "automaten/RE.h"
 #include "automaten/DFA.h"

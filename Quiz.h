@@ -6,12 +6,18 @@
 #define TA_GROEP_QUIZ_H
 
 #include "json.hpp"
+#include "ctime"
 
 #include <iostream>
 #include <fstream>
 #include <map>
 #include <vector>
 #include <string>
+#include <iterator>
+#include <set>
+#include <cstring>
+#include <sstream>
+#include <random>
 
 //namespaces
 using namespace std;
