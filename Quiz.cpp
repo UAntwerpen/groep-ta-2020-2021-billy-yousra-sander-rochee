@@ -5,6 +5,7 @@
 #include "Quiz.h"
 #include "Vraag.h"
 
+
 Quiz::Quiz(string filename) {
 // inlezen uit file
     std::ifstream input(filename);
@@ -38,6 +39,7 @@ Quiz::Quiz(string filename) {
             //maak antwoord leeg voor volgende iteratie
             antwoord.clear();
         }
+        vragen.push_back(v);
     }
 
     //Close the file!
@@ -45,10 +47,10 @@ Quiz::Quiz(string filename) {
 }
 
 //string split
-vector<string> split(const string& str, char delim = ' ') {
+vector<string> split(const string& str, char space = ' ') {
     stringstream stream(str);
     vector<string> vec;
-    for(string temp; getline(stream,temp, delim);)
+    for(string temp; getline(stream,temp, space);)
         vec.push_back(temp);
     return vec;
 }
@@ -70,13 +72,21 @@ bool checkInt(string &a) {
     return true;
 }
 
+inline int roundToInt(double d)
+{
+    return static_cast<int>(std::round(d));
+}
+
+
 void Quiz::selectGame() {
     //kies gamemode
     string mode;
 
+    clock_t randomTime = clock();
+
     cout << "Geef de mode die je wilt spelen op: ";
-    //getline(cin,mode);
-    mode = "classic 7";
+    getline(cin,mode);
+    //mode = "classic 3";
 
     //zorg ervoor dat eventuele spaties in het begin er worden uitgehaald
     int k = 0;
@@ -90,7 +100,7 @@ void Quiz::selectGame() {
     mode = mode.substr(k);
 
     //split de string in bruikbare delen. We gebruiken enkel de eerste 2
-    vector<string> input = split(mode, ' ');
+    vector<string> input = split(mode);
 
     //maak de eerste lowercase
     string m = toLowerCase(input[0]);
@@ -105,9 +115,9 @@ void Quiz::selectGame() {
         return selectGame();
     }
 
-
+    int r = roundToInt(((double)(clock() - randomTime)/CLOCKS_PER_SEC)*100);
     if(m == "classic") {
-        return classicMode(nr);
+        return this->classicMode(nr, r);
     } else if(m == "blind") {
         cout << "blind bestaat nog niet" << endl;
         return;
@@ -119,22 +129,33 @@ void Quiz::selectGame() {
     }
 }
 
-void Quiz::classicMode(const int aantal) {
-    cout << "called" << endl;
+void Quiz::classicMode(const int aantal, unsigned int randomTime) {
+    cout << "classic mode: enabled" << endl;
 
     //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
     //later kunnen we dan een willekeurige indexwaarde genereren en daarmee een vraag opvragen
     //aangezien het een set is, kunnen we ook eenvoudig deze waarde verwijderen zodat je in één quiz nooit tweemaal dezelfde vraag krijgt
-    set<int> s;
-    for(int i = 0; i < vragen.size(); i++) {
-        s.insert(i);
+
+    vector<int> r;
+    for(int i = 0; i < this->vragen.size(); i++) {
+        r.push_back(i);
     }
 
     //het spelen zelf:
     for(int n = 0; n < aantal; n++) {
 
-
-        auto pt = s.begin();
-        int vraagNr = *pt;
+        //index waarde voor 1 vraag
+        int index = randomTime % r.size();
+        cout << "element to remove: " << r[index] << endl;
+        for(auto in : r) {
+            cout << in << " ";
+        }
+        cout << endl;
+        r.erase(r.begin()+index);
+        for(auto in : r) {
+            cout << in << " ";
+        }
+        cout << endl;
+        cout << "-----" << endl;
     }
 }

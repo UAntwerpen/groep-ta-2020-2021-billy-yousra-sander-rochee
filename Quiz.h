@@ -18,6 +18,7 @@
 #include <cstring>
 #include <sstream>
 #include <random>
+//#include <algorithm>
 
 //namespaces
 using namespace std;
@@ -49,7 +50,7 @@ public:
      * na elke vraag krijg je het juiste antwoord op het scherm
      * Een totale score wordt op het einde gegeven en ook een mogelijkheid om alle juiste antwoorden op te vragen
      */
-    void classicMode(const int aantal);
+    void classicMode(int aantal, unsigned int randomTime);
 };
 
 
