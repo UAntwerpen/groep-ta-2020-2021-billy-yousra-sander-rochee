@@ -31,6 +31,19 @@ public:
      * @param filename: name of input file
      */
     Quiz(string filename);
+
+    /**
+     * deze functie start in het begin
+     */
+    void selectGame();
+
+    /**
+     * aanroep zal een spel in classic mode starten
+     * bij classic mode krijg je een aantal vragen die je moet beantwoorden
+     * na elke vraag krijg je het juiste antwoord op het scherm
+     * Een totale score wordt op het einde gegeven en ook een mogelijkheid om alle juiste antwoorden op te vragen
+     */
+    void classicMode(const int aantal);
 };
 
 
