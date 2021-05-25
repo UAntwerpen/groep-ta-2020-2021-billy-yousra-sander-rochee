@@ -29,9 +29,11 @@ class Vraag;
 
 class Quiz {
     void initialiseVragen();
-    pair<int,int> printFinalResults(vector<pair<int,int>> &totaleScore);
+    pair<int, int> printFinalResults(vector<pair<int, int>> &totaleScore, bool killer);
     void printAllResults();
     void printBlindAnswers(vector<vector<string>> &correction);
+
+    vector<vector<string>> stelVraag(int vIndex, pair<int, int>& score);
 public:
     //vector met pointers naar vragen
     vector<Vraag*> vragen;
@@ -63,8 +65,10 @@ public:
      * bij classic mode krijg je een aantal vragen die je moet beantwoorden
      * na elke vraag krijg je het juiste antwoord op het scherm
      * Een totale score wordt op het einde gegeven en ook een mogelijkheid om alle juiste antwoorden op te vragen
+     *
+     * Keuze voor hardcore mode waarbij iedere verwachte term in het antwoord moet zitten om de vraag juist te hebben
      */
-    void classicMode(int aantal, unsigned int randomTime);
+    void classicOutput(int aantal, unsigned int randomTime, bool hardcore);
 
     /**
      * aanroep zal een spel in blind mode starten
@@ -75,7 +79,7 @@ public:
      * het commando print alle vragen met hun juiste antwoorden uit en dan de antwoorden gegeven door de speler
      * het laatste is optioneel
      */
-    void blindMode(int aantal, unsigned int randomTime);
+    void blindOutput(int aantal, unsigned int randomTime, bool killer);
 };
 
 
