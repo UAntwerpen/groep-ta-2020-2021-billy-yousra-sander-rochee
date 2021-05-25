@@ -29,7 +29,7 @@ public:
 
     void setupAntwoorden();
 
-    vector<vector<string>> checkAntwoord(string& input) const;
+    vector<vector<string>> checkAntwoord(string& input, pair<int,int> &score) const;
 };
 
 

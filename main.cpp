@@ -20,6 +20,11 @@ int main() {
 
     Quiz q("voorbeeldJson.json");
 
+    //uitleg
+    cout << "Kies welke gamemode je wilt spelen. Doe dit door de juiste string op te geven" << endl;
+    cout << "de verwachtte input is 'Mode'+'aantal vragen':" << endl << "'Classic 5' bijvoorbeeld zal een spel in classic mode starten met 5 vragen" << endl;
+    cout << "gekende modi zijn: classic, blind, hardcore, killer (niet hoofdlettergevoelig)" << endl << endl;
+
     q.selectGame();
 
     printf("Run Time: %.3fs\n", (double)(clock() - strartT)/CLOCKS_PER_SEC);

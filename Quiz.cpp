@@ -55,13 +55,16 @@ void Quiz::initialiseVragen() {
     }
 }
 
-void Quiz::selectGame() {
+void Quiz::selectGame(bool stop) {
     //kies gamemode
     string mode;
 
     clock_t randomTime = clock();
-
+    if(stop) {
+        cout << "als je het spel echter wilt beeindigen, type dan het woordje 'stop'. Anders:\n";
+    }
     cout << "Geef de mode die je wilt spelen op:\n";
+
     getline(cin,mode);
     //mode = "classic 3";
 
@@ -82,6 +85,11 @@ void Quiz::selectGame() {
     //maak de eerste lowercase
     string m = toLowerCase(input[0]);
 
+    if(m=="stop" && stop) {
+        //eventueel hier iets doen met de score
+        return;
+    }
+
     //sla het nummer van de tweede op als int
     bool check = checkInt(input[1]);
     int nr;
@@ -89,6 +97,10 @@ void Quiz::selectGame() {
         nr = stoi(input[1]);
     } else {
         cout << "geef een geldig nummer op" << endl << endl;
+        return selectGame();
+    }
+    if(nr == 0) {
+        cout << "geef minstens 1 op als aantal" << endl << endl;
         return selectGame();
     }
 
@@ -118,6 +130,7 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
         r.push_back(i);
     }
 
+    vector<pair<int,int>> totaleScore;
     //het spelen zelf:
     for(int n = 0; n < aantal; n++) {
 
@@ -144,26 +157,51 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
          Stel dat ik 3 antwoorden geef waar er 2 correct van waren, dan weet ik niet dewelke
          Wel welke antwoorden ik niet gegeven heb
         */
-        vector<vector<string>> missed = vraag->checkAntwoord(input);
 
-        cout << "Ontbrekende termen:\n";
+        //eerste in houdt het aantal accepterende DFA's bij en de tweede het aantal vragen
+        //als je score.first == 2 en score.second == 3 hebt, dan heb je 2/3 gescoord
+        pair<int,int> score;
+        vector<vector<string>> missed = vraag->checkAntwoord(input, score);
+
+        cout << "Ontbrekende antwoorden:\n";
+        if(missed.empty()) {
+            cout << "--> geen" << endl;
+        }
         for (auto& v : missed) {
+            cout << "- ";
             for (auto& s : v) {
-                cout << s << '\t';
+                cout << s << ' ';
             }
             cout << endl;
         }
         /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
          * Einde voorbeeld
          */
+        cout << "score: " << score.first << '/' << score.second << endl;
+        totaleScore.push_back(score);
 
-
-//        cout << endl << "after removal: ";
         r.erase(r.begin()+index);
-//        for(auto in : r) {
-//            cout << in << " ";
-//        }
-//        cout << endl;
         cout << "-----" << endl;
     }
+
+    int correct = 0, totaal = 0;
+    for(pair<int,int> &punt : totaleScore) {
+        correct += punt.first;
+        totaal += punt.second;
+    }
+
+    cout << endl << "+--+===+-----------------------------------";
+    if(correct >= 10) { cout << "--";} else { cout << "-"; }
+    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
+    cout << "+===+--+\n| Je behaalde een totale score van " << correct << '/' << totaal;
+    if((double)correct/totaal >= 0.5) {
+        cout << " --> Gewonnen |";
+    } else {
+        cout << " --> Verloren |";
+    }
+    cout << endl << "+--+===+-----------------------------------";
+    if(correct >= 10) { cout << "--";} else { cout << "-"; }
+    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
+    cout << "+===+--+\n\n";
+    return this->selectGame(true);
 }

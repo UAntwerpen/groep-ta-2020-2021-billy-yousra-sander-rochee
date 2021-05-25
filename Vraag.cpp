@@ -42,11 +42,14 @@ void Vraag::setupAntwoorden() {
     }
 }
 
-vector<vector<string>> Vraag::checkAntwoord(string &input) const {
+vector<vector<string>> Vraag::checkAntwoord(string &input, pair<int,int> &score) const {
     vector<vector<string>> ontbrekendeAntwoorden;
+    score.second = antwoordDFAs.size();
     for (int i = 0; i < antwoordDFAs.size(); ++i) {
         if (!antwoordDFAs[i].accepts(input))
             ontbrekendeAntwoorden.push_back(antwoorden[i]);
+        else
+            score.first++;
     }
     return ontbrekendeAntwoorden;
 }
