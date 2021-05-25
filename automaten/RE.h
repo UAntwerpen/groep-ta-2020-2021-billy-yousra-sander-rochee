@@ -16,9 +16,11 @@ using namespace std;
  */
 class reNode {
 public:
+    set<char> alphabet;
+
     char fullAlphabet = '~';
 
-    static reNode* createReNode(string regexStr, char eps);
+    static reNode* createReNode(string regexStr, char eps, set<char>& alpha);
 
     virtual ~reNode() {};
     virtual bool accepts(string& iStr) const = 0;
@@ -41,7 +43,7 @@ protected:
 public:
     // Constructor and destructor
     RE(string regex, char eps);
-    RE(string regex);
+    RE(const string& regex);
     ~RE();
     // Checks if string is recognized by the RE
     virtual bool accepts(string iStr) const;
@@ -61,7 +63,7 @@ class charNode : public reNode {
     char c;
 public:
     // Constructor
-    charNode(string& iStr, char eps);
+    charNode(string& iStr, char eps, set<char>& alpha);
     // Checks whether string is accepted by the node
     bool accepts(string& iStr) const;
     // Converts node to ENFA states
@@ -81,7 +83,7 @@ class concNode : public reNode {
     reNode* rRE = nullptr;
 public:
     // Constructor and destructor
-    concNode(string& lStr, string& rStr, char eps);
+    concNode(string& lStr, string& rStr, char eps, set<char>& alpha);
     ~concNode();
     // Checks whether string is accepted by node
     bool accepts(string& iStr) const;
@@ -102,7 +104,7 @@ class unionNode : public reNode {
     reNode* rRE = nullptr;
 public:
     // Constructor and destructor
-    unionNode(string& lStr, string& rStr, char eps);
+    unionNode(string& lStr, string& rStr, char eps, set<char>& alpha);
     ~unionNode();
     // Checks whether string is accepted by node
     bool accepts(string& iStr) const;
@@ -122,7 +124,7 @@ class kleeneNode : public reNode {
     reNode* re = nullptr;
 public:
     // Constructor and destructor
-    kleeneNode(string& iStr, char eps);
+    kleeneNode(string& iStr, char eps, set<char>& alpha);
     ~kleeneNode();
     // Checks whether string is accepted by node
     bool accepts(string& iStr) const;

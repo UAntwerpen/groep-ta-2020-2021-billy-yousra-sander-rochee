@@ -4,6 +4,7 @@
 
 #include "Quiz.h"
 #include "Vraag.h"
+#include "algemeen.h"
 
 
 Quiz::Quiz(string filename) {
@@ -44,39 +45,15 @@ Quiz::Quiz(string filename) {
 
     //Close the file!
     input.close();
+
+    initialiseVragen();
 }
 
-//string split
-vector<string> split(const string& str, char space = ' ') {
-    stringstream stream(str);
-    vector<string> vec;
-    for(string temp; getline(stream,temp, space);)
-        vec.push_back(temp);
-    return vec;
-}
-
-//from uppercase to lowercase
-string toLowerCase(string s) {
-    transform(s.begin(), s.end(), s.begin(), ::tolower);
-    return s;
-}
-
-bool checkInt(string &a) {
-    for(char &c : a) {
-        if(c=='0'||c=='1'||c=='2'||c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9') {
-            continue;
-        } else {
-            return false;
-        }
+void Quiz::initialiseVragen() {
+    for (auto vraag : vragen) {
+        vraag->setupAntwoorden();
     }
-    return true;
 }
-
-inline int roundToInt(double d)
-{
-    return static_cast<int>(std::round(d));
-}
-
 
 void Quiz::selectGame() {
     //kies gamemode
@@ -84,7 +61,7 @@ void Quiz::selectGame() {
 
     clock_t randomTime = clock();
 
-    cout << "Geef de mode die je wilt spelen op: ";
+    cout << "Geef de mode die je wilt spelen op:\n";
     getline(cin,mode);
     //mode = "classic 3";
 
@@ -146,16 +123,47 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
 
         //index waarde voor 1 vraag
         int index = randomTime % r.size();
-        cout << "element to remove: " << r[index] << endl << "before removal: ";
-        for(auto in : r) {
-            cout << in << " ";
+//        cout << "element to remove: " << r[index] << endl << "before removal: ";
+//        for(auto in : r) {
+//            cout << in << " ";
+//        }
+
+        /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+         * Volgende code is een voorbeeld van hoe een antwoord nagekeken kan worden
+         */
+        string input;
+        Vraag* vraag = vragen[r[index]];
+        cout << vraag->vraag << endl;
+        getline(cin, input);
+        input = toLowerCase(input);
+
+        /*
+         Vector bevat alle vectoren van antwoorden die niet aanwezig waren
+         Er wordt niet gegeven welk van de gegeven antwoorden correct waren
+
+         Stel dat ik 3 antwoorden geef waar er 2 correct van waren, dan weet ik niet dewelke
+         Wel welke antwoorden ik niet gegeven heb
+        */
+        vector<vector<string>> missed = vraag->checkAntwoord(input);
+
+        cout << "Ontbrekende termen:\n";
+        for (auto& v : missed) {
+            for (auto& s : v) {
+                cout << s << '\t';
+            }
+            cout << endl;
         }
-        cout << endl << "after removal: ";
+        /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+         * Einde voorbeeld
+         */
+
+
+//        cout << endl << "after removal: ";
         r.erase(r.begin()+index);
-        for(auto in : r) {
-            cout << in << " ";
-        }
-        cout << endl;
+//        for(auto in : r) {
+//            cout << in << " ";
+//        }
+//        cout << endl;
         cout << "-----" << endl;
     }
 }

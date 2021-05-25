@@ -28,6 +28,7 @@ using json = nlohmann::json;
 class Vraag;
 
 class Quiz {
+    void initialiseVragen();
 public:
     //vector met pointers naar vragen
     vector<Vraag*> vragen;

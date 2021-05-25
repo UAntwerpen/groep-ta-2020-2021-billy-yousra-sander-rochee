@@ -10,6 +10,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include "automaten/DFA.h"
 
 using namespace std;
 
@@ -19,12 +20,16 @@ public:
     string vraag;
     vector<vector<string>> antwoorden;
 
-    string RE;
+    vector<DFA> antwoordDFAs;
 
     /**
      * empty constructor
      */
     Vraag() {}
+
+    void setupAntwoorden();
+
+    vector<vector<string>> checkAntwoord(string& input) const;
 };
 
 

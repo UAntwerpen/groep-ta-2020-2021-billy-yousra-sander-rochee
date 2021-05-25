@@ -12,7 +12,7 @@
  * @param eps:      Chosen epsilon character
  * @return          Pointer to starting node
  */
-reNode* reNode::createReNode(string regexStr, char eps) {
+reNode* reNode::createReNode(string regexStr, char eps, set<char>& alpha) {
     reNode* re = nullptr;
 
     // Bool representing whether there is a union outside of the brackets
@@ -66,7 +66,7 @@ reNode* reNode::createReNode(string regexStr, char eps) {
                 if (regexStr[i + 1] == '+') {
                     string lStr = regexStr.substr(0, i + 1);
                     string rStr = regexStr.substr(i + 2, regexStr.size());
-                    re = new unionNode(lStr, rStr, eps);
+                    re = new unionNode(lStr, rStr, eps, alpha);
                     break;
                 } // Kleene star not at end of string, skip to next character
                 else if (regexStr[i + 1] == '*' && i != regexStr.size()-2)
@@ -74,20 +74,20 @@ reNode* reNode::createReNode(string regexStr, char eps) {
                 // Kleene star at end of string
                 else if (regexStr[i + 1] == '*' && i == regexStr.size()-2) {
                     string kleen = regexStr.substr(0, i+1);
-                    re = new kleeneNode(kleen, eps);
+                    re = new kleeneNode(kleen, eps, alpha);
                     break;
                 } // Concatenation when no union
                 else if (!Union) {
                     string lStr = regexStr.substr(0, i + 1);
                     string rStr = regexStr.substr(i + 1, regexStr.size());
-                    re = new concNode(lStr, rStr, eps);
+                    re = new concNode(lStr, rStr, eps, alpha);
                     break;
                 }
             }
         }
     } // Nothing yet, thus single character
     if (re == nullptr && regexStr.size() == 1)
-        re = new charNode(regexStr, eps);
+        re = new charNode(regexStr, eps, alpha);
 
     return re;
 }
@@ -108,18 +108,18 @@ RE::RE(string regex, char eps) {
         if (c != '(' && c != ')' && c != eps && c != '+' && c != '*')
             alphabet.insert(c);
     }
-    re = reNode::createReNode(regex, eps);
+    re = reNode::createReNode(regex, eps, alphabet);
 }
 
 /**
  * Creates a regex to recognise a word in a text
  * @param regex
  */
-RE::RE(string regex) {
+RE::RE(const string& regex) {
     textAlphabet();
     string loopStr = alphabetLoop();
-    string reStr = loopStr + regex + loopStr;
-    re = reNode::createReNode(reStr, epsilon);
+    string reStr = loopStr + "(" + regex + ")" + loopStr;
+    re = reNode::createReNode(reStr, epsilon, alphabet);
 }
 
 RE::~RE() {
@@ -199,6 +199,10 @@ void RE::textAlphabet() {
     for (char c = 97; c <= 122; ++c) {
         alphabet.insert(c);
     }
+    for (char c = '0'; c <= '9'; ++c) {
+        alphabet.insert(c);
+    }
+    alphabet.insert(' ');
     epsilon = '#';
 }
 
@@ -210,8 +214,10 @@ void RE::textAlphabet() {
  * @param iStr: String containing the character
  * @param eps:  Chosen epsilon character
  */
-charNode::charNode(string &iStr, char eps) {
+charNode::charNode(string &iStr, char eps, set<char>& alpha) {
     epsilon = eps;
+    alphabet = alpha;
+
     if (iStr.size() == 1)
         c = iStr[0];
     if (iStr.size() == 3 && iStr[0] == '(' && iStr[2] == ')')
@@ -249,7 +255,7 @@ vector<State *> charNode::toENFA(vector<State *>& states) const {
     // Two states with transition on character
     states.push_back(sState); states.push_back(eState);
     if (c == fullAlphabet) {
-        for (int i = 97; i <= 122; ++i) {
+        for (char i : alphabet) {
             sState->transitions.insert(pair<char, vector<State*>>(i, vector<State*>{eState}));
         }
     } else
@@ -275,11 +281,12 @@ void charNode::print() const {
  * @param rStr: Regex right of concatenation
  * @param eps:  Chosen epsilon character
  */
-concNode::concNode(string &lStr, string &rStr, char eps) {
+concNode::concNode(string &lStr, string &rStr, char eps, set<char>& alpha) {
     epsilon = eps;
+    alphabet = alpha;
     // Create nodes for left and right regex
-    lRE = createReNode(lStr, eps);
-    rRE = createReNode(rStr, eps);
+    lRE = createReNode(lStr, eps, alpha);
+    rRE = createReNode(rStr, eps, alpha);
 }
 
 concNode::~concNode() {
@@ -357,11 +364,12 @@ void concNode::print() const {
  * @param rStr: Regex right of union
  * @param eps:  Chosen epsilon character
  */
-unionNode::unionNode(string &lStr, string &rStr, char eps) {
+unionNode::unionNode(string &lStr, string &rStr, char eps, set<char>& alpha) {
     epsilon = eps;
+    alphabet = alpha;
     // Create nodes for left and right regex
-    lRE = createReNode(lStr, eps);
-    rRE = createReNode(rStr, eps);
+    lRE = createReNode(lStr, eps, alpha);
+    rRE = createReNode(rStr, eps, alpha);
 }
 
 unionNode::~unionNode() {
@@ -445,10 +453,11 @@ void unionNode::print() const {
  * @param iStr: Regex contained in node
  * @param eps:  Chosen epsilon character
  */
-kleeneNode::kleeneNode(string &iStr, char eps) {
+kleeneNode::kleeneNode(string &iStr, char eps, set<char>& alpha) {
     epsilon = eps;
+    alphabet = alpha;
     // Create node for regex
-    re = createReNode(iStr, eps);
+    re = createReNode(iStr, eps, alpha);
 }
 
 kleeneNode::~kleeneNode() {

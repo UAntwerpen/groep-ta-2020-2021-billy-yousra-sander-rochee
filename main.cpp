@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 #include "json.hpp"
 #include "Vraag.h"
@@ -8,12 +9,43 @@
 #include "automaten/DFA.h"
 #include "automaten/ENFA.h"
 
+#include <ctime>
+
 using namespace std;
+using json = nlohmann::json;
 
 
 int main() {
-//    Quiz q("voorbeeldJson.json");
-//
+    clock_t strartT = clock();
+
+    Quiz q("voorbeeldJson.json");
+
+    q.selectGame();
+
+    printf("Run Time: %.3fs\n", (double)(clock() - strartT)/CLOCKS_PER_SEC);
+
+    return 0;
+}
+
+/*
+    //niet opgeslagen als string
+    char antwoord[512];
+
+    cout << "Geef je antwoord op: ";
+    cin.getline(antwoord,512);
+
+    cout << "je gegeven antwoord was: " << antwoord << endl;
+
+
+
+    //wel opgeslagen als string
+    string antw;
+
+    cout << "Geef je antwoord op: ";
+    getline(cin,antw);
+
+    cout << "je gegeven antwoord was: " << antw;
+
     //mijn deel gebruikt de false zodat ik mijn deel kan testen met de main en jij jouw deel (true)
     bool test = false;
     if(!test) {
@@ -66,8 +98,8 @@ int main() {
     cout << boolalpha << product.accepts("ditiserookeen") << endl;
     cout << boolalpha << product.accepts("thisstringisfortestingpurposesonly") << endl;
 
-//    RE r = product.toRE();
-//    r.print();
+    RE r = product.toRE();
+    r.print();
 
     tStart = clock();
     DFA minProduct = product.minimize();
@@ -79,28 +111,6 @@ int main() {
 
     minProduct.print();
 
-//    RE productRE = minProduct.toRE();
-//    productRE.print();
-
-    return 0;
-}
-
-/*
-    //niet opgeslagen als string
-    char antwoord[512];
-
-    cout << "Geef je antwoord op: ";
-    cin.getline(antwoord,512);
-
-    cout << "je gegeven antwoord was: " << antwoord << endl;
-
-
-
-    //wel opgeslagen als string
-    string antw;
-
-    cout << "Geef je antwoord op: ";
-    getline(cin,antw);
-
-    cout << "je gegeven antwoord was: " << antw;
+    RE productRE = minProduct.toRE();
+    productRE.print();
  */

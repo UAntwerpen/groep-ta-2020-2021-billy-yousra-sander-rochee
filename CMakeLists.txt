@@ -12,6 +12,6 @@ set(SOURCE_FILES
         automaten/DFA.cpp
         automaten/NFA.cpp
         automaten/ENFA.cpp
-        automaten/RE.cpp)
+        automaten/RE.cpp algemeen.cpp algemeen.h)
 
 add_executable(TA_groep ${SOURCE_FILES})
