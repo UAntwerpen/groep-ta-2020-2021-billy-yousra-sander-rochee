@@ -112,6 +112,222 @@
           "Arabisch"
         ]
       ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Noem de 5 meest voorkomende sluitingen van kledij op.",
+      "antwoorden": [
+        [
+          "knop"
+        ],
+        [
+          "rits"
+        ],
+        [
+          "haakjes"
+        ],
+        [
+          "velkro"
+        ],
+        [
+          "koord"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 5 meest voorkomende achternamen in Vlaanderen",
+      "antwoorden": [
+        [
+          "Peeters"
+        ],
+        [
+          "Maes"
+        ],
+        [
+          "Willems"
+        ],
+        [
+          "Janssens",
+          "Jansens"
+        ],
+        [
+          "Jacobs"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn, naar bevolkingsaantal, de grootste steden van Australie",
+      "antwoorden": [
+        [
+          "Perth"
+        ],
+        [
+          "Sydney"
+        ],
+        [
+          "Brisbane"
+        ],
+        [
+          "Melbourne"
+        ],
+        [
+          "Adelaide"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Geef de 5 oranje/rode groenten die de Vlaming het vaakst eet",
+      "antwoorden": [
+        [
+          "wortel",
+          "wortelen"
+        ],
+        [
+          "paprika",
+          "paprikas"
+        ],
+        [
+          "zoete aardappel",
+          "zoete aardappels"
+        ],
+        [
+          "pompoen",
+          "pompoenen"
+        ],
+        [
+          "tomaat",
+          "tomaten"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "In welke 4 landen leven olifanten het meest?",
+      "antwoorden": [
+        [
+          "Zimbabwe"
+        ],
+        [
+          "Kenia"
+        ],
+        [
+          "Tanzania"
+        ],
+        [
+          "Botswana"
+        ],
+        [
+          "Zambia"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Dennis Rodman?",
+      "antwoorden": [
+        [
+          "Amerikaans"
+        ],
+        [
+          "Chicago Bulls"
+        ],
+        [
+          "basketbalspeler",
+          "basket",
+          "basketter"
+        ],
+        [
+          "Excentriek"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Leen Dendievel?",
+      "antwoorden": [
+        [
+          "actrice"
+        ],
+        [
+          "Thuis"
+        ],
+        [
+          "boek"
+        ],
+        [
+          "kaat",
+          "kaat bomans"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "In welke 5 Belgische winkelstraten moeten huurders de hoogste prijs betalen voor een pand?",
+      "antwoorden": [
+        [
+          "Meir"
+        ],
+        [
+          "Steenstraat"
+        ],
+        [
+          "Veldstraat"
+        ],
+        [
+          "Nieuwstraat"
+        ],
+        [
+          "Louizalaan"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 5 spullen worden het vaakst naar kringwinkels gebracht?",
+      "antwoorden": [
+        [
+          "kleding",
+          "kledij",
+          "kleren"
+        ],
+        [
+          "boeken"
+        ],
+        [
+          "servies"
+        ],
+        [
+          "elektrische apparaten",
+          "elektro"
+        ],
+        [
+          "meubels"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn naast Chichen Itza en Petra de 7 Nieuwe Wereldwonderen",
+      "antwoorden": [
+        [
+          "Chinese muur"
+        ],
+        [
+          "Machu Picchu"
+        ],
+        [
+          "Taj Mahal"
+        ],
+        [
+          "Cristo Redentor"
+        ],
+        [
+          "Colosseum"
+        ]
+      ]
     }
   ]
 }
