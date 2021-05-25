@@ -55,13 +55,65 @@ void Quiz::initialiseVragen() {
     }
 }
 
+pair<int,int> Quiz::printFinalResults(vector<pair<int, int>> &totaleScore) {
+    int correct = 0, totaal = 0;
+    for(pair<int,int> &punt : totaleScore) {
+        correct += punt.first;
+        totaal += punt.second;
+    }
+
+    cout << endl << "+--+===+-----------------------------------";
+    if(correct >= 10) { cout << "--";} else { cout << "-"; }
+    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
+    cout << "+===+--+\n| Je behaalde een totale score van " << correct << '/' << totaal;
+    if((double)correct/totaal >= 0.5) {
+        cout << " --> Gewonnen |";
+    } else {
+        cout << " --> Verloren |";
+    }
+    cout << endl << "+--+===+-----------------------------------";
+    if(correct >= 10) { cout << "--";} else { cout << "-"; }
+    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
+    cout << "+===+--+\n\n";
+    pair<int,int> ret_val;
+    ret_val.first = correct;
+    ret_val.second = totaal;
+    return ret_val;
+}
+
+void Quiz::printAllResults() {
+    cout << "+=+---------------------+=+" << endl; //27
+
+    for(int n = 0; n < resultaten.size(); n++) {
+        string out = "| Spel " + to_string(n+1) + " (" + modes[n] + "): " + to_string(resultaten[n].first) + "/" + to_string(resultaten[n].second);
+        int extra = 27-out.size()-1;
+        for(int i = 0; i < extra; i++) {
+            out += ' ';
+        }
+        cout << out << '|' << endl;
+
+    }
+
+    cout << "+=+---------------------+=+" << endl; //27
+}
+
+void Quiz::printBlindAnswers(vector<vector<string>> &correction) {
+    int nr = 1;
+    for(auto &str_vec : correction) {
+        cout << "vraag " << nr << ": " << str_vec[0] << endl;
+        cout << "verwacht: " << str_vec[1] << endl;
+        cout << "verkregen: " << str_vec[2] << endl << endl;
+        nr++;
+    }
+}
+
 void Quiz::selectGame(bool stop) {
     //kies gamemode
     string mode;
 
     clock_t randomTime = clock();
     if(stop) {
-        cout << "als je het spel echter wilt beeindigen, type dan het woordje 'stop'. Anders:\n";
+        cout << "als je het spel echter wilt beeindigen, type dan het woordje 'stop', Anders:\n";
     }
     cout << "Geef de mode die je wilt spelen op:\n";
 
@@ -87,7 +139,7 @@ void Quiz::selectGame(bool stop) {
 
     if(m=="stop" && stop) {
         //eventueel hier iets doen met de score
-        return;
+        return this->printAllResults();
     }
 
     //sla het nummer van de tweede op als int
@@ -108,8 +160,7 @@ void Quiz::selectGame(bool stop) {
     if(m == "classic") {
         return this->classicMode(nr, r);
     } else if(m == "blind") {
-        cout << "blind bestaat nog niet" << endl;
-        return;
+        return this->blindMode(nr, r);
     } else if(m == "hardcore") {
         return;
     } else {
@@ -131,6 +182,7 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
     }
 
     vector<pair<int,int>> totaleScore;
+
     //het spelen zelf:
     for(int n = 0; n < aantal; n++) {
 
@@ -184,24 +236,82 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
         cout << "-----" << endl;
     }
 
-    int correct = 0, totaal = 0;
-    for(pair<int,int> &punt : totaleScore) {
-        correct += punt.first;
-        totaal += punt.second;
+    pair<int,int> p = this->printFinalResults(totaleScore);
+    this->resultaten.push_back(p);
+    this->modes.emplace_back("classic");
+
+    return this->selectGame(true);
+}
+
+void Quiz::blindMode(int aantal, unsigned int randomTime) {
+    cout << "blind mode: enabled" << endl;
+
+    //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
+    //later kunnen we dan een willekeurige indexwaarde genereren en daarmee een vraag opvragen
+    //aangezien het een set is, kunnen we ook eenvoudig deze waarde verwijderen zodat je in één quiz nooit tweemaal dezelfde vraag krijgt
+
+    vector<int> r;
+    for(int i = 0; i < this->vragen.size(); i++) {
+        r.push_back(i);
     }
 
-    cout << endl << "+--+===+-----------------------------------";
-    if(correct >= 10) { cout << "--";} else { cout << "-"; }
-    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
-    cout << "+===+--+\n| Je behaalde een totale score van " << correct << '/' << totaal;
-    if((double)correct/totaal >= 0.5) {
-        cout << " --> Gewonnen |";
-    } else {
-        cout << " --> Verloren |";
+    vector<pair<int,int>> totaleScore;
+    vector<vector<string>> stringToPrint;
+
+    //het spelen zelf:
+    for(int n = 0; n < aantal; n++) {
+
+        vector<string> blind;
+        //index waarde voor 1 vraag
+        int index = randomTime % r.size();
+
+        string input;
+        Vraag* vraag = vragen[r[index]];
+        cout << vraag->vraag << endl;
+
+        blind.push_back(vraag->vraag);
+
+        string expected;
+        for(auto &antwoordset : vraag->antwoorden) {
+            for(auto &ant : antwoordset) {
+                expected+=ant; expected+='/';
+            }
+            expected.pop_back();expected+="  ";
+        }
+        blind.push_back(expected);
+
+        getline(cin, input);
+        input = toLowerCase(input);
+        blind.push_back(input);
+
+
+        //eerste in houdt het aantal accepterende DFA's bij en de tweede het aantal vragen
+        //als je score.first == 2 en score.second == 3 hebt, dan heb je 2/3 gescoord
+        pair<int,int> score;
+
+        vector<vector<string>> missed = vraag->checkAntwoord(input, score);
+
+
+        //cout << "score: " << score.first << '/' << score.second << endl;
+        totaleScore.push_back(score);
+
+        r.erase(r.begin()+index);
+        cout << "-----" << endl;
+        stringToPrint.push_back(blind);
     }
-    cout << endl << "+--+===+-----------------------------------";
-    if(correct >= 10) { cout << "--";} else { cout << "-"; }
-    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
-    cout << "+===+--+\n\n";
+
+    pair<int,int> p = this->printFinalResults(totaleScore);
+    this->resultaten.push_back(p);
+    this->modes.emplace_back("blind");
+
+    //functie op antwoorden uit te printen
+    string a;
+    cout << "typ 'ja' als je je antwoorden wilt uitprinten. anders typ je wat je wil om verder te gaan" << endl;
+    getline(cin, a);
+    a = toLowerCase(a);
+    if(a == "ja") {
+        this->printBlindAnswers(stringToPrint);
+    }
+    cout << endl;
     return this->selectGame(true);
 }

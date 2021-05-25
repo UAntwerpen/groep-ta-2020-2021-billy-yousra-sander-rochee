@@ -29,9 +29,16 @@ class Vraag;
 
 class Quiz {
     void initialiseVragen();
+    pair<int,int> printFinalResults(vector<pair<int,int>> &totaleScore);
+    void printAllResults();
+    void printBlindAnswers(vector<vector<string>> &correction);
 public:
     //vector met pointers naar vragen
     vector<Vraag*> vragen;
+
+    //vector met resultaten die worden afgeprint bij het beeinigen van het spel
+    vector<pair<int,int>> resultaten;
+    vector<string> modes;
 
     /**
      * krijgt json bestand mee om vragen aan te maken
@@ -53,6 +60,17 @@ public:
      * Een totale score wordt op het einde gegeven en ook een mogelijkheid om alle juiste antwoorden op te vragen
      */
     void classicMode(int aantal, unsigned int randomTime);
+
+    /**
+     * aanroep zal een spel in blind mode starten
+     * bij blind mode krijg je een aantal vragen die je moet beantwoorden
+     * na elke vraag krijg je het juiste antwoord niet op het scherm (bij classic wel)
+     * een score wordt ook niet gegeven en enkel op het einde weet je je uiteindelijke score
+     * op het einde kan je de juiste vragen opvragen door een commando te typen
+     * het commando print alle vragen met hun juiste antwoorden uit en dan de antwoorden gegeven door de speler
+     * het laatste is optioneel
+     */
+    void blindMode(int aantal, unsigned int randomTime);
 };
 
 
