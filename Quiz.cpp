@@ -271,7 +271,11 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
 
     pair<int,int> p = this->printFinalResults(totaleScore, false);
     this->resultaten.push_back(p);
-    this->modes.emplace_back("classic");
+    if(hardcore) {
+        this->modes.emplace_back("hardcore");
+    } else {
+        this->modes.emplace_back("classic");
+    }
 
     return this->selectGame(true);
 }
@@ -347,7 +351,11 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
 
     pair<int,int> p = this->printFinalResults(totaleScore, killer);
     this->resultaten.push_back(p);
-    this->modes.emplace_back("blind");
+    if(killer) {
+        this->modes.emplace_back("killer");
+    } else {
+        this->modes.emplace_back("blind");
+    }
 
     //functie op antwoorden uit te printen
     string a;
