@@ -42,10 +42,24 @@ void Vraag::setupAntwoorden() {
     }
 }
 
+void removeUnknown(string& input) {
+    for (char& c : input) {
+        if (!(c >= 'a' && c <= 'z') && c != ' ' && !(c >= '0' && c <= '9'))
+            c = ' ';
+    }
+}
+
 vector<vector<string>> Vraag::checkAntwoord(string &input, pair<int,int> &score) const {
+    // Verwijder alle nietgekende tekens uit een antwoord
+    // Enkel Spaties en alphanumerieke waarden worden nagekeken
+    removeUnknown(input);
+
     vector<vector<string>> ontbrekendeAntwoorden;
+    // Stel aantal punten voor huidige vraag op
     score.second = antwoordDFAs.size();
+    // Ga over de DFA's voor de verschillende verwachte woorden
     for (int i = 0; i < antwoordDFAs.size(); ++i) {
+        // Kijk of woord voorkomt
         if (!antwoordDFAs[i].accepts(input))
             ontbrekendeAntwoorden.push_back(antwoorden[i]);
         else

@@ -107,13 +107,22 @@ void Quiz::printBlindAnswers(vector<vector<string>> &correction) {
     }
 }
 
+void Quiz::startGame() {
+    //uitleg
+    cout << "Kies welke gamemode je wilt spelen. Doe dit door de juiste string op te geven" << endl;
+    cout << "de verwachtte input is 'Mode'+'aantal vragen':" << endl << "'Classic 5' bijvoorbeeld zal een spel in classic mode starten met 5 vragen" << endl;
+    cout << "gekende modi zijn: classic, blind, hardcore, killer (niet hoofdlettergevoelig)" << endl << endl;
+
+    this->selectGame();
+}
+
 void Quiz::selectGame(bool stop) {
     //kies gamemode
     string mode;
 
     clock_t randomTime = clock();
     if(stop) {
-        cout << "als je het spel echter wilt beeindigen, type dan het woordje 'stop', Anders:\n";
+        cout << "als je het spel wilt beeindigen, type dan het woordje 'stop', Anders:\n";
     }
     cout << "Geef de mode die je wilt spelen op:\n";
 
@@ -140,6 +149,11 @@ void Quiz::selectGame(bool stop) {
     if(m=="stop" && stop) {
         //eventueel hier iets doen met de score
         return this->printAllResults();
+    }
+
+    if (input.size() < 2) {
+        cout << "Geen correcte string voor de modus opgegeven!" << endl;
+        return selectGame();
     }
 
     //sla het nummer van de tweede op als int
@@ -210,7 +224,7 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
          Wel welke antwoorden ik niet gegeven heb
         */
 
-        //eerste in houdt het aantal accepterende DFA's bij en de tweede het aantal vragen
+        //eerste int houdt het aantal accepterende DFA's bij en de tweede het aantal vragen
         //als je score.first == 2 en score.second == 3 hebt, dan heb je 2/3 gescoord
         pair<int,int> score;
         vector<vector<string>> missed = vraag->checkAntwoord(input, score);
@@ -221,8 +235,10 @@ void Quiz::classicMode(const int aantal, unsigned int randomTime) {
         }
         for (auto& v : missed) {
             cout << "- ";
-            for (auto& s : v) {
-                cout << s << ' ';
+            for (int i = 0; i < v.size(); ++i) {
+                cout << v[i];
+                if (i + 1 != v.size())
+                    cout << ", ";
             }
             cout << endl;
         }
