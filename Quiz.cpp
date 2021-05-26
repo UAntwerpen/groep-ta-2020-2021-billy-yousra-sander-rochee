@@ -146,7 +146,7 @@ void Quiz::selectGame(bool stop) {
     //maak de eerste lowercase
     string m = toLowerCase(input[0]);
 
-    if(m=="stop" && stop) {
+    if(m=="stop") {
         //eventueel hier iets doen met de score
         return this->printAllResults();
     }
@@ -165,7 +165,7 @@ void Quiz::selectGame(bool stop) {
         cout << "geef een geldig nummer op" << endl << endl;
         return selectGame();
     }
-    if(nr == 0) {
+    if(nr < 0) {
         cout << "geef minstens 1 op als aantal" << endl << endl;
         return selectGame();
     }
@@ -196,7 +196,7 @@ vector<vector<string>> Quiz::stelVraag(int vIndex, pair<int, int> &score) {
 }
 
 void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
-    cout << "classic mode: enabled" << endl;
+    //cout << "classic mode: enabled" << endl;
 
     //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
     //later kunnen we dan een willekeurige indexwaarde genereren en daarmee een vraag opvragen
@@ -281,7 +281,7 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
 }
 
 void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
-    cout << "blind mode: enabled" << endl;
+    //cout << "blind mode: enabled" << endl;
 
     //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
     //later kunnen we dan een willekeurige indexwaarde genereren en daarmee een vraag opvragen

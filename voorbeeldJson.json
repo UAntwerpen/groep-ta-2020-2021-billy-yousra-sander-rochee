@@ -42,7 +42,7 @@
     },
     {
       "type": "oplijsting",
-      "vraag": "Wat zijn de 4 grootste landen van Asie?",
+      "vraag": "Wat zijn de 4 grootste landen van Azie?",
       "antwoorden": [
         [
           "Rusland"
@@ -61,7 +61,7 @@
     },
     {
       "type": "oplijsting",
-      "vraag": "Uit welke 3 elementaire deeltjes is een atoom opgebouwd",
+      "vraag": "Uit welke 3 elementaire deeltjes is een atoom opgebouwd?",
       "antwoorden": [
         [
           "elektron",
@@ -136,7 +136,7 @@
     },
     {
       "type": "oplijsting",
-      "vraag": "Wat zijn de 5 meest voorkomende achternamen in Vlaanderen",
+      "vraag": "Wat zijn de 5 meest voorkomende achternamen in Vlaanderen?",
       "antwoorden": [
         [
           "Peeters"
@@ -158,7 +158,7 @@
     },
     {
       "type": "oplijsting",
-      "vraag": "Wat zijn, naar bevolkingsaantal, de 5 grootste steden van Australie",
+      "vraag": "Wat zijn, naar bevolkingsaantal, de 5 grootste steden van Australie?",
       "antwoorden": [
         [
           "Perth"
@@ -191,7 +191,8 @@
         ],
         [
           "zoete aardappel",
-          "zoete aardappels"
+          "zoete aardappels",
+          "bataat"
         ],
         [
           "pompoen",
@@ -229,7 +230,8 @@
       "vraag": "Wat weet je over Dennis Rodman?",
       "antwoorden": [
         [
-          "Amerikaans"
+          "Amerikaans",
+          "Amerikaan"
         ],
         [
           "Chicago Bulls"
@@ -311,7 +313,7 @@
     },
     {
       "type": "oplijsting",
-      "vraag": "Wat zijn naast Chichen Itza en Petra de 7 Nieuwe Wereldwonderen",
+      "vraag": "Wat zijn naast Chichen Itza en Petra de 7 Nieuwe Wereldwonderen?",
       "antwoorden": [
         [
           "Chinese muur"
