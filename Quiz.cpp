@@ -45,14 +45,6 @@ Quiz::Quiz(string filename) {
 
     //Close the file!
     input.close();
-
-    initialiseVragen();
-}
-
-void Quiz::initialiseVragen() {
-    for (auto vraag : vragen) {
-        vraag->setupAntwoorden();
-    }
 }
 
 pair<int, int> Quiz::printFinalResults(vector<pair<int, int>> &totaleScore, bool killer) {
@@ -189,6 +181,9 @@ vector<vector<string>> Quiz::stelVraag(int vIndex, pair<int, int> &score) {
     string input;
     Vraag* vraag = vragen[vIndex];
     cout << vraag->vraag << endl;
+
+    vraag->setupAntwoorden();
+
     getline(cin, input);
     input = toLowerCase(input);
 
@@ -312,6 +307,8 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
         string input;
         Vraag* vraag = vragen[r[index]];
         cout << vraag->vraag << endl;
+
+        vraag->setupAntwoorden();
 
         blind.push_back(vraag->vraag);
 

@@ -8,6 +8,8 @@
 #include <ctime>
 
 void Vraag::setupAntwoorden() {
+    if (!antwoordDFAs.empty())
+        return;
     for (auto& set : antwoorden) {
         string antwoordStr;
 

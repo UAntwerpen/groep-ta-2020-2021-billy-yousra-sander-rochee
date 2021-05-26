@@ -20,9 +20,9 @@ int main() {
 
     Quiz q("voorbeeldJson.json");
 
-    q.startGame();
-
     printf("Run Time: %.3fs\n", (double)(clock() - strartT)/CLOCKS_PER_SEC);
+
+    q.startGame();
 
     return 0;
 }
