@@ -57,10 +57,13 @@ public:
     void printTable() const;
     // Overload compare to check for equivalent DFA's
     bool operator== (DFA& check);
+    DFA& operator= (const DFA& check);
 
     RE toRE();
 
     void rename();
+
+    bool empty();
 };
 
 

@@ -22,6 +22,8 @@ public:
     // DFA's om antwoorden met na te kijken
     vector<DFA> antwoordDFAs;
 
+    DFA product;
+
     /**
      * empty constructor
      */
@@ -31,6 +33,8 @@ public:
      * Creëert de DFA's om de antwoorden na te kijken
      */
     void setupAntwoorden();
+
+    void setupProduct();
 
     /**
      * Kijkt welke verwachte woorden niet voorkomen in het gegeven antwoord

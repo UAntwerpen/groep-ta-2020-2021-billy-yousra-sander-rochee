@@ -34,14 +34,32 @@ void Vraag::setupAntwoorden() {
 //        clock_t startT = clock();
 
         DFA dfa = enfa.toDFA().minimize();
+        dfa.rename();
 
-//        printf("Setup DFA: %.2fs\t", (double)(clock() - startT) / CLOCKS_PER_SEC);
+//        printf("Setup DFA: %.4fs\t", (double)(clock() - startT) / CLOCKS_PER_SEC);
 //        startT = clock();
 
         antwoordDFAs.push_back(dfa);
 
 //        printf("Minimize DFA: %.2fs\n", (double)(clock() - startT) / CLOCKS_PER_SEC);
     }
+}
+
+void Vraag::setupProduct() {
+    if (!product.empty())
+        return;
+    if (antwoordDFAs.empty())
+        this->setupAntwoorden();
+
+    vector<DFA> products;
+    products.push_back(antwoordDFAs[0]);
+
+    for (int i = 1; i < antwoordDFAs.size(); ++i) {
+        DFA tempProduct(products[i-1], antwoordDFAs[i], true);
+        products.push_back(tempProduct);
+//        product = tempProduct.minimize();
+    }
+    product = products[products.size() - 1].minimize();
 }
 
 void removeUnknown(string& input) {

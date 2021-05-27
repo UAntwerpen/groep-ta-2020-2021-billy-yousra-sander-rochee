@@ -16,6 +16,14 @@ State::State(const State &state) {
     transitions = state.transitions;
 }
 
+State & State::operator=(const State &copy) {
+    name = copy.name;
+    starting = copy.starting;
+    accepting = copy.accepting;
+    transitions = copy.transitions;
+    return *this;
+}
+
 deadState::deadState(vector<char> &alphabet) {
     name = "";
     // Set transitions for whole alphabet to self
@@ -96,6 +104,17 @@ FA::~FA() {
     for (auto state : states) {
         delete state;
     }
+}
+
+void FA::clear() {
+    alphabet = {};
+    acceptingStates = {};
+    startState = nullptr;
+    type = "FA";
+    for (auto sPtr : states) {
+        delete sPtr;
+    }
+    states = {};
 }
 
 json FA::createJson() const {
