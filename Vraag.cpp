@@ -31,11 +31,11 @@ void Vraag::setupAntwoorden() {
         ENFA enfa = re.toENFA();
 
 //        printf("Setup ENFA: %.2fs\t", (double)(clock() - startT) / CLOCKS_PER_SEC);
-//        startT = clock();
+        clock_t startT = clock();
 
-        DFA dfa = enfa.toDFA();
+        DFA dfa = enfa.toDFA().minimize();
 
-//        printf("Setup DFA: %.2fs\t", (double)(clock() - startT) / CLOCKS_PER_SEC);
+        printf("Setup DFA: %.2fs\t", (double)(clock() - startT) / CLOCKS_PER_SEC);
 //        startT = clock();
 
         antwoordDFAs.push_back(dfa);

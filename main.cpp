@@ -16,11 +16,11 @@ using json = nlohmann::json;
 
 
 int main() {
-    clock_t strartT = clock();
+    clock_t startT = clock();
 
     Quiz q("voorbeeldJson.json");
 
-    printf("Run Time: %.3fs\n", (double)(clock() - strartT)/CLOCKS_PER_SEC);
+    printf("Run Time: %.3fs\n", (double)(clock() - startT) / CLOCKS_PER_SEC);
 
     q.startGame();
 

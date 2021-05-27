@@ -27,11 +27,13 @@ private:
     // Sorts the states in the given vector
     vector<State*> sortStates(const vector<State*>& states) const;
     // Creates the transition table of the given states
-    vector<pair<string, vector<string>>> createTransTable(const vector<State*>& states) const;
+    void createTransTable(const vector<State *> &states,
+                          vector<map<State *, set<State *>>> &transMap /*Output Value*/) const;
     // Setup for the TFA table
-    vector<vector<string>> initialiseTable(const vector<State*>& states) const;
+    vector<pair<int, int>> initialiseTable(const vector<State *> &states,
+                                           vector<vector<string>> &table /* Output */) const;
     // Run TFA
-    vector<vector<string>> createTable(const vector<State*>& states) const;
+    void createTable(const vector<State *> &states, vector<vector<string>> &table /* Output */) const;
     // Get all equivalent states { {eqv states 1}, {eqv states 2}, ... }
     vector<set<string>> getEqvStates() const;
     // Creates a minimized state from the state names

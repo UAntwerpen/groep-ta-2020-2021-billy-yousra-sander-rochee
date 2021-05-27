@@ -19,6 +19,7 @@ using json = nlohmann::json;
 //
 // Constructors and destructor
 //
+
 DFA::DFA(const string &fileName) : FA(fileName) {
     if (type != "DFA") {
         cerr << "Wrong type in input file." << endl;
@@ -181,126 +182,114 @@ vector<State *> DFA::sortStates(const vector<State*>& states) const {
 }
 
 /**
- * Creates the transition table of the given states
- * { ( state_name, { trans_alpabet[0], trans_alpabet[1], ... } ), ... }
- * @param states:   States of which to create table
- * @return          the table
+ * Creates a transition table for the given states
+ * Table consists of maps per alphabet character linking a state with the states that transition to it
+ * @param states:       Sorted states for which to make the table
+ * @param transMap:     Output, Location to create map
  */
-vector<pair<string, vector<string>>> DFA::createTransTable(const vector<State*>& states) const {
-    // Vector to store the table
-    vector<pair<string, vector<string>>> transitions;
-    // Go over the states
-    for (auto state : states) {
-        // Vector to store the destination states on transition
-        vector<string> transStates;
-        // Loop over alphabet
-        for (char c : alphabet) {
-            // Add transition states to transStates
-            if (state->transitions.find(c) != state->transitions.end()) {
-                transStates.push_back(state->transitions[c][0]->name);
-            }
+void DFA::createTransTable(const vector<State *> &states,
+                           vector<map<State *, set<State *>>> &transMap /* Output */) const {
+    // Go over characters in alphabet
+    for (auto c : alphabet) {
+        // Store the transitions to de different states
+        map<State*, set<State*>> transTo;
+
+        for (State* state : states) {
+            State* desState = state->transitions[c][0];
+            transTo[desState].insert(state);
         }
-        // Add state and transitions to table
-        transitions.push_back(pair<string, vector<string>>(state->name, transStates));
+        transMap.push_back(transTo);
     }
-    return transitions;
 }
 
 /**
- * Setup of the table for TFA
- * @param states:   States of which to make table
- * @return          An empty TFA table (empty as in starting table)
+ * Setup the table for the TFA
+ * @param states:   Sorted states for which to make the table
+ * @param table:    Location for table
+ * @return          Vector containing cords of marked fields in table
  */
-vector<vector<string>> DFA::initialiseTable(const vector<State*>& states) const {
-    vector<vector<string>> table;
-    for (int i = 0; i < states.size(); ++i) {
+vector<pair<int, int>> DFA::initialiseTable(const vector<State *> &states,
+                                            vector<vector<string>> &table /* Output */) const {
+    // Keep track of newly marked spots on the table
+    vector<pair<int, int>> markedCords;
+    // Go over rows
+    for (int i = 0; i <= states.size() - 2; ++i) {
         vector<string> row;
-        for (int j = 0; j <= i+1 && j < states.size(); ++j) {
-            row.push_back("");
-            // Put names of states in first collum and last row
-            // Leave first or last state depending on filling collum or row
-            if (j == 0 && i != states.size()-1) {
-                row[j] = states[i+1]->name;
-            } else if (i == states.size()-1 && j != 0) {
-                row[j] = states[j-1]->name;
-            } else if (j > 0 && i < (states.size()-1)) {
-                // Add marker to collums/rows of accepting states
-                if (states[i+1]->accepting && !states[j-1]->accepting)
-                    row[j] = "X";
-                else if (!states[i+1]->accepting && states[j-1]->accepting)
-                    row[j] = "X";
-                    // Else nothing thus "-"
-                else {
-                    row[j] = "-";
-                }
+        // Go over collums
+        for (int j = 0; j <= i; ++j) {
+            row.emplace_back("");
+
+            // row_state = row+1; collum_state = collum;
+            // If one of both states is accepting spot should be marked
+            if ((states[i+1]->accepting && !states[j]->accepting) || (!states[i+1]->accepting && states[j]->accepting))
+            {
+                row[j] = "X";
+                // Keep track of marked spots
+                markedCords.emplace_back(i, j);
+            }
+            else {
+                // Nothing on the spot
+                row[j] = "-";
             }
         }
+        // Add row to the table
         table.push_back(row);
     }
-    return table;
+
+    return markedCords;
 }
 
 /**
- * Creates a filled TFA table
- * @param states:   States of which to create the table
- * @return          The TFA table
+ * Creates a completely filled TFA table
+ * @param states:   Sorted states for which to create the table
+ * @param table:    Location of table
  */
-vector<vector<string>> DFA::createTable(const vector<State*>& states) const {
-    vector<State*> sorted = sortStates(states);
+void DFA::createTable(const vector<State *> &states, vector<vector<string>> &table /* Output */) const {
     // Get transition table
-    vector<pair<string, vector<string>>> transitions = createTransTable(sorted);
+    vector<map<State*, set<State*>>> transMap;
+    createTransTable(states, transMap);
     // Get starting table
-    vector<vector<string>> table = initialiseTable(sorted);
+    vector<pair<int, int>> marked = initialiseTable(states, table);
 
-    // Check to see if new mark added
-    bool newMark = true;
-    while (newMark) {
-        newMark = false;
-        // Loop over the table
-        for (int i = 0; i < table.size()-1; i++) {
-            for (int j = 1; j < table[i].size(); j++) {
-                // If spot has a mark
-                if (table[i][j] == "X") {
-                    // Get states of row and collum
-                    pair<string, string> p(table[i][0], table[table.size()-1][j]);
-                    // Loop over alphabet
-                    for (int k = 0; k < alphabet.size(); ++k) {
-                        // Dubble loop through transition table
-                        for (auto p1 : transitions) {
-                            for (auto p2 : transitions) {
-                                // Check whether both points in loop contain names from set p (states of mark)
-                                if (p1 != p2 && ((p1.second[k] == p.first && p2.second[k] == p.second) ||
-                                                 (p1.second[k] == p.second && p2.second[k] == p.first))) {
-                                    // Look for new found position in table
-                                    for (int row = 0; row < table.size()-1; row++) {
-                                        // Keeps track whether position is found (signle position to mark in table)
-                                        bool marked = false;
-                                        for (int col = 1; col < table[row].size(); col++) {
-                                            if ((table[row][0] == p1.first && table[table.size()-1][col] == p2.first) ||
-                                                (table[row][0] == p2.first && table[table.size()-1][col] == p1.first)) {
-                                                // Only enable newMark if actual new mark
-                                                if (table[row][col] == "-")
-                                                    newMark = true;
-                                                table[row][col] = "X";
-                                                // Position found thus break and enable marked
-                                                marked = true;
-                                                break;
-                                            }
-                                        }
-                                        // If position found break loop
-                                        // Optimizes so that not whole table is checked for a single mark
-                                        if (marked)
-                                            break;
-                                    }
-                                }
-                            }
+    // Newly marked fields
+    while (!marked.empty()) {
+        // Place to temporarily store new marked spots
+        vector<pair<int, int>> tempMarked;
+        // Go over all marked fields in table
+        for (auto& cords : marked) {
+            // Get states linked to field
+            State* verS = states[cords.first + 1];
+            State* horS = states[cords.second];
+
+            // Go over all transitions on the different alphabet characters
+            for (auto& c : transMap) {
+                // Go over transition states to first state
+                for (State* s1 : c[verS]) {
+                    // Go over transition states to second state
+                    for (State* s2 : c[horS]) {
+                        // Get index for row/collum of transition states
+                        unsigned int i1 = find(states.begin(), states.end(), s1) - states.begin();
+                        unsigned int i2 = find(states.begin(), states.end(), s2) - states.begin();
+
+                        // Cords fit in the table
+                        // First state of ordered states always collum cord
+                        if ((i1 == 0) || (i2 >= table[i1 - 1].size()))
+                            swap(i1, i2);
+                        // Row index is 1 less than state index
+                        i1 -= 1;
+                        // Add new mark if not yet marked
+                        if (table[i1][i2] != "X") {
+                            table[i1][i2] = "X";
+                            // Store new marked location
+                            tempMarked.emplace_back(i1, i2);
                         }
                     }
                 }
             }
         }
+        // Update marked locations
+        marked = tempMarked;
     }
-    return table;
 }
 
 /**
@@ -309,30 +298,40 @@ vector<vector<string>> DFA::createTable(const vector<State*>& states) const {
  */
 vector<set<string>> DFA::getEqvStates() const {
     // Create the table
-    vector<vector<string>> table = createTable(states);
+    vector<State*> sorted = sortStates(states);
+    vector<vector<string>> table;
+    createTable(sorted, table);
+
+    // Vector to store sets of equivalent states
     vector<set<string>> eqvStates;
+
     // Loop over rows of the table
-    for (int i = 0; i < table.size()-1; ++i) {
+    for (int i = 0; i < table.size(); ++i) {
         // Loop over collums of the table
-        for (int j = 1; j < table[i].size(); ++j) {
-            // Empty spot
+        for (int j = 0; j < table[i].size(); ++j) {
+            // Empty field
             if (table[i][j] == "-") {
+                // Get states linked to field
+                State* verS = sorted[i + 1];
+                State* horS = sorted[j];
+
                 // Check to see if states are added to existing set
                 bool added = false;
                 // Go over sets of equivalent states
                 for (auto& set : eqvStates) {
                     // Set containing one of the states exists
-                    if (set.find(table[i][0]) != set.cend() || set.find(table[table.size()-1][j]) != set.cend()) {
+                    if (set.find(verS->name) != set.cend() || set.find(horS->name) != set.cend()) {
                         // Add the states to the set
-                        set.insert(table[i][0]);
-                        set.insert(table[table.size()-1][j]);
+                        set.insert(verS->name);
+                        set.insert(horS->name);
                         added = true;
+                        break;
                     }
                 }
                 // States not added to existing set
                 if (!added) {
                     // Create new set of states
-                    eqvStates.push_back(set<string>{table[i][0], table[table.size()-1][j]});
+                    eqvStates.push_back(set<string>{verS->name, horS->name});
                 }
             }
         }
@@ -450,14 +449,23 @@ DFA DFA::minimize() {
  */
 void DFA::printTable() const {
     // Get table
-    vector<vector<string>> table = createTable(states);
+    vector<State*> sorted = sortStates(states);
+    vector<vector<string>> table;
+    createTable(sorted, table);
+
     // Loop over table to print the table
     for (int i = 0; i < table.size(); ++i) {
+        cout << sorted[i + 1]->name << "\t";
         for (int j = 0; j <= i+1 && j < table.size(); ++j) {
             cout << table[i][j] << '\t';
         }
         cout << endl;
     }
+    cout << "\t";
+    for (int i = 0; i <= sorted.size() - 2; ++i) {
+        cout << sorted[i] << "\t";
+    }
+    cout << endl;
 }
 
 /**
@@ -474,30 +482,35 @@ bool DFA::operator==(DFA &check) {
     allStates.insert(allStates.cend(), compStates.cbegin(), compStates.cend());
 
     // Create table of combined states
-    vector<vector<string>> table = createTable(allStates);
+    vector<vector<string>> table;
+    createTable(allStates, table);
     bool eqv = false;
     int maxRow = table.size()-1;
     // Loop over table
     for (int i = 0; i < table.size(); ++i) {
+        cout << allStates[i + 1] << "\t";
         for (int j = 0; j < table[i].size(); ++j) {
             cout << table[i][j] << '\t';
             // If row and collum state are both start states
-            if ((table[i][0] == startState->name && table[maxRow][j] == check.startState->name) ||
-                    (table[i][0] == check.startState->name && table[maxRow][j] == startState->name))
+            State* verS = allStates[i + 1];
+            State* horS = allStates[j];
+
+            if ((verS == startState && horS == check.startState) ||
+                (verS == check.startState && horS == startState))
                 // Check whether equivalent states (empty spot)
                 eqv = (table[i][j] == "-");
         }
         cout << endl;
     }
+
+    cout << "\t";
+    for (int i = 0; i <= allStates.size() - 2; ++i) {
+        cout << allStates[i] << "\t";
+    }
+    cout << endl;
+
     return eqv;
 }
-
-//struct reTransition{
-//    reTransition(State* s, State* e, string regex) : from(s), to(e), re(regex) {}
-//    State* from;
-//    State* to;
-//    string re;
-//};
 
 /**
  * Create a regular expresion from the DFA
@@ -636,82 +649,3 @@ void DFA::rename() {
         states[i]->name = to_string(i);
     }
 }
-
-//-------------------------------------------------------------------
-// Bellow is the original createTable code using an array of strings
-//-------------------------------------------------------------------
-
-/*
-    vector<State*> sorted = sortedStates();
-
-    vector<pair<string, vector<string>>> transitions;
-    for (auto state : sorted) {
-        vector<string> transStates;
-        for (string a : alphabet) {
-            char c = a[0];
-            if (state->transitions.find(a[0]) != state->transitions.end()) {
-                transStates.push_back(state->transitions[c][0]->name);
-            }
-        }
-        transitions.push_back(pair<string, vector<string>>(state->name, transStates));
-    }
-
-    // Tabel opstellen
-    string table[sorted.size()][sorted.size()];
-    for (int i = 0; i < sorted.size(); ++i) {
-        for (int j = 0; j <= i+1 && j < sorted.size(); ++j) {
-            table[i][j] = "";
-            // Namen van states in eerste kolom en laatste rij
-            // Afhangend eerste of laatste state weglaten
-            if (j == 0 && i != sorted.size()-1) {
-                table[i][j] = sorted[i+1]->name;
-            } else if (i == sorted.size()-1 && j != 0) {
-                table[i][j] = sorted[j-1]->name;
-            } else if (j > 0 && i < (sorted.size()-1)) {
-                // Bij accepting states 0 toevoegen
-                if (sorted[i+1]->accepting && !sorted[j-1]->accepting)
-                    table[i][j] = "X";
-                else if (!sorted[i+1]->accepting && sorted[j-1]->accepting)
-                    table[i][j] = "X";
-                // Anders niet = '-'
-                else {
-                    table[i][j] = "-";
-                }
-            }
-        }
-    }
-
-    bool newCheck = true;
-    int iteration = 0;
-
-    while (newCheck) {
-        newCheck = false;
-        for (int i = 0; i < sorted.size()-1; i++) {
-            for (int j = 1; j <= i+1 && j < sorted.size(); j++) {
-                if (table[i][j] == "X") {
-                    pair<string, string> p(table[i][0], table[sorted.size()-1][j]);
-                    for (int k = 0; k < alphabet.size(); ++k) {
-                        for (auto p1 : transitions) {
-                            for (auto p2 : transitions) {
-                                if (p1 != p2 && ((p1.second[k] == p.first && p2.second[k] == p.second) ||
-                                    (p1.second[k] == p.second && p2.second[k] == p.first))) {
-                                    for (int row = 0; row < sorted.size()-1; row++) {
-                                        for (int col = 1; col <= i+1 && col < sorted.size(); col++) {
-                                            if (((table[row][0] == p1.first && table[sorted.size()-1][col] == p2.first) ||
-                                                (table[row][0] == p2.first && table[sorted.size()-1][col] == p1.first)) &&
-                                                table[row][col] == "-") {
-                                                table[row][col] = "X";
-                                                newCheck = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        iteration += 1;
-    }
-*/
