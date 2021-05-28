@@ -73,6 +73,16 @@ pair<int, int> Quiz::printFinalResults(vector<pair<int, int>> &totaleScore, bool
     return ret_val;
 }
 
+void Quiz::addFile(string filename) {
+    //maak een nieuwe quiz aan met vragen van een nieuwe file
+    Quiz tempQuiz(filename);
+
+    //zet de vragen van de nieuwe quiz in de huidige quiz
+    for(auto vraag : tempQuiz.vragen) {
+        this->vragen.push_back(vraag);
+    }
+}
+
 void Quiz::printAllResults() {
     cout << "+=+---------------------+=+" << endl; //27
 
