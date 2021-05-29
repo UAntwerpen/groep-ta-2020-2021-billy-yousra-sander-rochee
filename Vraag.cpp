@@ -51,16 +51,12 @@ void Vraag::setupProduct() {
     if (antwoordDFAs.empty())
         this->setupAntwoorden();
 
-//    vector<DFA> products;
-//    products.push_back(antwoordDFAs[0]);
     product = antwoordDFAs[0];
 
     for (int i = 1; i < antwoordDFAs.size(); ++i) {
         DFA tempProduct(product, antwoordDFAs[i], true);
-//        products.push_back(tempProduct);
         product = tempProduct.minimize();
     }
-//    product = products[products.size() - 1].minimize();
 }
 
 void removeUnknown(string& input) {
@@ -70,21 +66,29 @@ void removeUnknown(string& input) {
     }
 }
 
-vector<vector<string>> Vraag::checkAntwoord(string &input, pair<int,int> &score) const {
+vector<vector<string>> Vraag::checkAntwoord(string &input, pair<int, int> &score, bool useProduct) const {
     // Verwijder alle nietgekende tekens uit een antwoord
     // Enkel Spaties en alphanumerieke waarden worden nagekeken
     removeUnknown(input);
 
     vector<vector<string>> ontbrekendeAntwoorden;
-    // Stel aantal punten voor huidige vraag op
-    score.second = antwoordDFAs.size();
-    // Ga over de DFA's voor de verschillende verwachte woorden
-    for (int i = 0; i < antwoordDFAs.size(); ++i) {
-        // Kijk of woord voorkomt
-        if (!antwoordDFAs[i].accepts(input))
-            ontbrekendeAntwoorden.push_back(antwoorden[i]);
-        else
+
+    if (useProduct) {
+        score.second = 1;
+        if (this->product.accepts(input))
             score.first++;
+    } else {
+
+        // Stel aantal punten voor huidige vraag op
+        score.second = antwoordDFAs.size();
+        // Ga over de DFA's voor de verschillende verwachte woorden
+        for (int i = 0; i < antwoordDFAs.size(); ++i) {
+            // Kijk of woord voorkomt
+            if (!antwoordDFAs[i].accepts(input))
+                ontbrekendeAntwoorden.push_back(antwoorden[i]);
+            else
+                score.first++;
+        }
     }
     return ontbrekendeAntwoorden;
 }

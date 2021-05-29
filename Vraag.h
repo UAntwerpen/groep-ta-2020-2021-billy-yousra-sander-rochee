@@ -42,7 +42,7 @@ public:
      * @param score:    Pair voor behaalde score en max score
      * @return      Vector met alle ontbrekende woorden
      */
-    vector<vector<string>> checkAntwoord(string& input, pair<int,int> &score) const;
+    vector<vector<string>> checkAntwoord(string &input, pair<int, int> &score, bool useProduct = false) const;
 };
 
 

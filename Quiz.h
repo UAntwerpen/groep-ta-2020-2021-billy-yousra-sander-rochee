@@ -27,6 +27,8 @@ using json = nlohmann::json;
 //forward declaration
 class Vraag;
 
+bool useProduct = false;
+
 class Quiz {
     void initialiseVragen();
     pair<int, int> printFinalResults(vector<pair<int, int>> &totaleScore, bool killer);
@@ -79,7 +81,7 @@ public:
      * het commando print alle vragen met hun juiste antwoorden uit en dan de antwoorden gegeven door de speler
      * het laatste is optioneel
      */
-    void blindOutput(int aantal, unsigned int randomTime, bool killer);
+    void blindOutput(int aantal, unsigned int randomTime, bool killer, bool product = false);
 };
 
 

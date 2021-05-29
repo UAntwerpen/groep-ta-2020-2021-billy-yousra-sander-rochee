@@ -170,7 +170,7 @@ void Quiz::selectGame(bool stop) {
     } else if(m == "hardcore") {
         return this->classicOutput(nr, r, true);
     } else if (m == "killer") {
-        return this->blindOutput(nr, r, true);
+        return this->blindOutput(nr, r, true, useProduct);
     } else {
         cout << "de ingegeven modus wordt niet herkend" << endl << endl;
         return selectGame();
@@ -209,19 +209,6 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
 
         //index waarde voor 1 vraag
         int index = randomTime % r.size();
-//        cout << "element to remove: " << r[index] << endl << "before removal: ";
-//        for(auto in : r) {
-//            cout << in << " ";
-//        }
-
-        /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-         * Volgende code is een voorbeeld van hoe een antwoord nagekeken kan worden
-         */
-//        string input;
-//        Vraag* vraag = vragen[r[index]];
-//        cout << vraag->vraag << endl;
-//        getline(cin, input);
-//        input = toLowerCase(input);
 
         /*
          Vector bevat alle vectoren van antwoorden die niet aanwezig waren
@@ -234,7 +221,7 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
         //eerste int houdt het aantal accepterende DFA's bij en de tweede het aantal vragen
         //als je score.first == 2 en score.second == 3 hebt, dan heb je 2/3 gescoord
         pair<int,int> score;
-        vector<vector<string>> missed = stelVraag(r[index], score); /*vraag->checkAntwoord(input, score);*/
+        vector<vector<string>> missed = stelVraag(r[index], score);
 
         if (hardcore) {
             score.first = floor(score.first/score.second);
@@ -254,9 +241,7 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
             }
             cout << endl;
         }
-        /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-         * Einde voorbeeld
-         */
+
         cout << "score: " << score.first << '/' << score.second << endl;
         totaleScore.push_back(score);
 
@@ -275,7 +260,7 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
     return this->selectGame(true);
 }
 
-void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
+void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer, bool product) {
     //cout << "blind mode: enabled" << endl;
 
     //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
@@ -283,7 +268,7 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
     //aangezien het een set is, kunnen we ook eenvoudig deze waarde verwijderen zodat je in één quiz nooit tweemaal dezelfde vraag krijgt
 
     vector<int> r;
-    for(int i = 0; i < this->vragen.size(); i++) {
+    for (int i = 0; i < this->vragen.size(); i++) {
         r.push_back(i);
     }
 
@@ -293,7 +278,7 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
     bool wrongAnswer = false;
 
     //het spelen zelf:
-    for(int n = 0; n < aantal; n++) {
+    for (int n = 0; n < aantal; n++) {
 
         if (wrongAnswer) {
             totaleScore.emplace_back(0, 1);
@@ -309,15 +294,18 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
         cout << vraag->vraag << endl;
 
         vraag->setupAntwoorden();
+        if (product) {
+            vraag->setupProduct();
+        }
 
         blind.push_back(vraag->vraag);
 
         string expected;
-        for(auto &antwoordset : vraag->antwoorden) {
+        for (auto &antwoordset : vraag->antwoorden) {
             for(auto &ant : antwoordset) {
                 expected+=ant; expected+='/';
             }
-            expected.pop_back();expected+="  ";
+            expected.pop_back();expected+=",  ";
         }
         blind.push_back(expected);
 
@@ -329,7 +317,7 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
         //eerste in houdt het aantal accepterende DFA's bij en de tweede het aantal vragen
         //als je score.first == 2 en score.second == 3 hebt, dan heb je 2/3 gescoord
         pair<int,int> score;
-        vector<vector<string>> missed = vraag->checkAntwoord(input, score);
+        vraag->checkAntwoord(input, score, product);
 
         if (killer) {
             score.first = floor(score.first / score.second);
@@ -348,7 +336,7 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
 
     pair<int,int> p = this->printFinalResults(totaleScore, killer);
     this->resultaten.push_back(p);
-    if(killer) {
+    if (killer) {
         this->modes.emplace_back("killer");
     } else {
         this->modes.emplace_back("blind");
@@ -356,10 +344,10 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer) {
 
     //functie op antwoorden uit te printen
     string a;
-    cout << "typ 'ja' als je je antwoorden wilt uitprinten. anders typ je wat je wil om verder te gaan" << endl;
+    cout << "type 'ja' als je je antwoorden wilt uitprinten, anders type je wat je wil om verder te gaan" << endl;
     getline(cin, a);
     a = toLowerCase(a);
-    if(a == "ja") {
+    if (a == "ja") {
         this->printBlindAnswers(stringToPrint);
     }
     cout << endl;

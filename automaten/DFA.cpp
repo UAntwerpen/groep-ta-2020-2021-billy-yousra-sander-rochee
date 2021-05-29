@@ -78,6 +78,8 @@ DFA::DFA(const DFA &dfa) {
 
     alphabet = dfa.alphabet;
     type = dfa.type;
+
+    map<string, State*> stateMap;
     // Go over states in original DFA
     for (auto state : dfa.states) {
         // Create new state
@@ -85,18 +87,14 @@ DFA::DFA(const DFA &dfa) {
         // Copy parameters from state in original DFA
         *(nState) = *(state);
         states.push_back(nState); // Add new state to new DFA
+        stateMap[nState->name]= nState;
     }
     // Loop over states
     for (auto fState : states) {
         // Second loop over states
-        for (auto sState : states) {
-            // Loop over alphabet
-            for (auto c : alphabet) {
-                // Check whether transition from first state to second state on current character
-                if (sState->transitions[c][0]->name == fState->name)
-                    // Update pointer in the transition
-                    sState->transitions[c][0] = fState;
-            }
+        for (auto c : alphabet) {
+            State* oDes = fState->transitions[c][0];
+            fState->transitions[c] = {stateMap[oDes->name]};
         }
         // Add state to correct parameters if necessary
         if (fState->starting)
