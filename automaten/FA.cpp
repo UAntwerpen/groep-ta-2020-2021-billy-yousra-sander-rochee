@@ -20,7 +20,9 @@ State & State::operator=(const State &copy) {
     name = copy.name;
     starting = copy.starting;
     accepting = copy.accepting;
-    transitions = copy.transitions;
+    for (const auto& pair : copy.transitions) {
+        transitions[pair.first] = pair.second;
+    }
     return *this;
 }
 

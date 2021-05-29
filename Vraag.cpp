@@ -51,15 +51,16 @@ void Vraag::setupProduct() {
     if (antwoordDFAs.empty())
         this->setupAntwoorden();
 
-    vector<DFA> products;
-    products.push_back(antwoordDFAs[0]);
+//    vector<DFA> products;
+//    products.push_back(antwoordDFAs[0]);
+    product = antwoordDFAs[0];
 
     for (int i = 1; i < antwoordDFAs.size(); ++i) {
-        DFA tempProduct(products[i-1], antwoordDFAs[i], true);
-        products.push_back(tempProduct);
-//        product = tempProduct.minimize();
+        DFA tempProduct(product, antwoordDFAs[i], true);
+//        products.push_back(tempProduct);
+        product = tempProduct.minimize();
     }
-    product = products[products.size() - 1].minimize();
+//    product = products[products.size() - 1].minimize();
 }
 
 void removeUnknown(string& input) {
