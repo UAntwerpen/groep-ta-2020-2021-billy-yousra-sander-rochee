@@ -8,7 +8,37 @@
 
 
 Quiz::Quiz(string filename) {
-// inlezen uit file
+    this->addFile(filename);
+}
+
+pair<int, int> Quiz::printFinalResults(vector<pair<int, int>> &totaleScore, bool killer) {
+    int correct = 0, totaal = 0;
+    for(pair<int,int> &punt : totaleScore) {
+        correct += punt.first;
+        totaal += punt.second;
+    }
+
+    cout << endl << "+--+===+-----------------------------------";
+    if(correct >= 10) { cout << "--";} else { cout << "-"; }
+    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
+    cout << "+===+--+\n| Je behaalde een totale score van " << correct << '/' << totaal;
+    if( ((double)correct/totaal >= 0.5 && !killer) || ((double)correct/totaal == 1 && killer) ) {
+        cout << " --> Gewonnen |";
+    } else {
+        cout << " --> Verloren |";
+    }
+    cout << endl << "+--+===+-----------------------------------";
+    if(correct >= 10) { cout << "--";} else { cout << "-"; }
+    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
+    cout << "+===+--+\n\n";
+    pair<int,int> ret_val;
+    ret_val.first = correct;
+    ret_val.second = totaal;
+    return ret_val;
+}
+
+void Quiz::addFile(string filename) {
+    // inlezen uit file
     std::ifstream input(filename);
     json j;
     input >> j;
@@ -45,42 +75,6 @@ Quiz::Quiz(string filename) {
 
     //Close the file!
     input.close();
-}
-
-pair<int, int> Quiz::printFinalResults(vector<pair<int, int>> &totaleScore, bool killer) {
-    int correct = 0, totaal = 0;
-    for(pair<int,int> &punt : totaleScore) {
-        correct += punt.first;
-        totaal += punt.second;
-    }
-
-    cout << endl << "+--+===+-----------------------------------";
-    if(correct >= 10) { cout << "--";} else { cout << "-"; }
-    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
-    cout << "+===+--+\n| Je behaalde een totale score van " << correct << '/' << totaal;
-    if( ((double)correct/totaal >= 0.5 && !killer) || ((double)correct/totaal == 1 && killer) ) {
-        cout << " --> Gewonnen |";
-    } else {
-        cout << " --> Verloren |";
-    }
-    cout << endl << "+--+===+-----------------------------------";
-    if(correct >= 10) { cout << "--";} else { cout << "-"; }
-    if(totaal >= 10) { cout << "--";} else { cout << "-"; }
-    cout << "+===+--+\n\n";
-    pair<int,int> ret_val;
-    ret_val.first = correct;
-    ret_val.second = totaal;
-    return ret_val;
-}
-
-void Quiz::addFile(string filename) {
-    //maak een nieuwe quiz aan met vragen van een nieuwe file
-    Quiz tempQuiz(filename);
-
-    //zet de vragen van de nieuwe quiz in de huidige quiz
-    for(auto vraag : tempQuiz.vragen) {
-        this->vragen.push_back(vraag);
-    }
 }
 
 void Quiz::printAllResults() {
@@ -163,6 +157,8 @@ void Quiz::selectGame(bool stop) {
     int nr;
     if(check) {
         nr = stoi(input[1]);
+        int vraagAmount = vragen.size();
+        nr = min(nr, vraagAmount);
     } else {
         cout << "geef een geldig nummer op" << endl << endl;
         return selectGame();

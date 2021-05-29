@@ -31,7 +31,6 @@ class Quiz {
     void initialiseVragen();
     pair<int, int> printFinalResults(vector<pair<int, int>> &totaleScore, bool killer);
 
-    void addFile(string filename);
     void printAllResults();
     void printBlindAnswers(vector<vector<string>> &correction);
 
@@ -50,6 +49,8 @@ public:
      * @param filename: name of input file
      */
     Quiz(string filename);
+
+    void addFile(string filename);
 
     /**
      * Functie die het spel zal starten

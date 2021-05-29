@@ -1,0 +1,22 @@
+{
+  "vragen": [
+    {
+      "type": "oplijsting",
+      "vraag": "Wat waren de 4 best vorkopende automerken in 2020 in Belgie?",
+      "antwoorden": [
+        [
+          "volkswagen"
+        ],
+        [
+          "bmw"
+        ],
+        [
+          "peugeot"
+        ],
+        [
+          "renault"
+        ]
+      ]
+    }
+  ]
+}
