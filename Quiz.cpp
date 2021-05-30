@@ -161,6 +161,9 @@ void Quiz::selectGame(bool stop) {
     } else if (m == "clear") {
         this->clear();
         selectGame(true);
+    } else if (m == "product") {
+        useProduct = !useProduct;
+        selectGame(true);
     }
 
     if (input.size() < 2) {

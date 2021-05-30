@@ -27,16 +27,15 @@ using json = nlohmann::json;
 //forward declaration
 class Vraag;
 
-bool useProduct = false;
-
 class Quiz {
-    void initialiseVragen();
     pair<int, int> printFinalResults(vector<pair<int, int>> &totaleScore, bool killer);
 
     void printAllResults();
     void printBlindAnswers(vector<vector<string>> &correction);
 
     vector<vector<string>> stelVraag(int vIndex, pair<int, int>& score);
+
+    bool useProduct = false;
 public:
     //vector met pointers naar vragen
     vector<Vraag*> vragen;
