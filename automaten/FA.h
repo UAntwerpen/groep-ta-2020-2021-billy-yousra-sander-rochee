@@ -27,6 +27,9 @@ struct State{
     // Default constructor
     State() {}
     State(string n, bool acc, bool start) : name(n), accepting(acc), starting(start) {}
+
+    State& operator= (const State& copy);
+
     string name;
     bool accepting = false;
     bool starting = false;
@@ -56,6 +59,9 @@ public:
     FA() { type = "FA"; startState = nullptr; }
     FA(const string &fileName);
     ~FA();
+
+    void clear();
+
     // Set the alphabet of the FA
     void setAlphabet(const vector<char>& v) {alphabet = v;}
 

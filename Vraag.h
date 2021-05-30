@@ -22,6 +22,8 @@ public:
     // DFA's om antwoorden met na te kijken
     vector<DFA> antwoordDFAs;
 
+    DFA product;
+
     /**
      * empty constructor
      */
@@ -32,13 +34,15 @@ public:
      */
     void setupAntwoorden();
 
+    void setupProduct();
+
     /**
      * Kijkt welke verwachte woorden niet voorkomen in het gegeven antwoord
      * @param input:    Het gegecen antwoord
      * @param score:    Pair voor behaalde score en max score
      * @return      Vector met alle ontbrekende woorden
      */
-    vector<vector<string>> checkAntwoord(string& input, pair<int,int> &score) const;
+    vector<vector<string>> checkAntwoord(string &input, pair<int, int> &score, bool useProduct = false) const;
 };
 
 

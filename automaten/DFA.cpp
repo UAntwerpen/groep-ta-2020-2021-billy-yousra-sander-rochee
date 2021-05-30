@@ -58,7 +58,7 @@ DFA::DFA(DFA &dfa1, DFA &dfa2, bool doorsnede) {
     // Set starting true for returned state (start state)
     stateMap[sState]->starting = true;
     // Go over states
-    for (auto set : stateMap) {
+    for (auto& set : stateMap) {
         // Add state to correct parameters of the DFA
         if (set.second->starting)
             startState = set.second;
@@ -74,8 +74,12 @@ DFA::DFA(DFA &dfa1, DFA &dfa2, bool doorsnede) {
  */
 DFA::DFA(const DFA &dfa) {
     // Copy alphabet and type
+    this->clear();
+
     alphabet = dfa.alphabet;
     type = dfa.type;
+
+    map<string, State*> stateMap;
     // Go over states in original DFA
     for (auto state : dfa.states) {
         // Create new state
@@ -83,18 +87,14 @@ DFA::DFA(const DFA &dfa) {
         // Copy parameters from state in original DFA
         *(nState) = *(state);
         states.push_back(nState); // Add new state to new DFA
+        stateMap[nState->name]= nState;
     }
     // Loop over states
     for (auto fState : states) {
         // Second loop over states
-        for (auto sState : states) {
-            // Loop over alphabet
-            for (auto c : alphabet) {
-                // Check whether transition from first state to second state on current character
-                if (sState->transitions[c][0]->name == fState->name)
-                    // Update pointer in the transition
-                    sState->transitions[c][0] = fState;
-            }
+        for (auto c : alphabet) {
+            State* oDes = fState->transitions[c][0];
+            fState->transitions[c] = {stateMap[oDes->name]};
         }
         // Add state to correct parameters if necessary
         if (fState->starting)
@@ -102,6 +102,38 @@ DFA::DFA(const DFA &dfa) {
         if (fState->accepting)
             acceptingStates.push_back(fState);
     }
+}
+
+DFA & DFA::operator=(const DFA &check) {
+    this->clear();
+
+    alphabet = check.alphabet;
+    type = check.type;
+
+    map<string, State*> stateMap;
+    // Go over states in original DFA
+    for (auto state : check.states) {
+        // Create new state
+        State* nState = new State;
+        // Copy parameters from state in original DFA
+        *(nState) = *(state);
+        states.push_back(nState); // Add new state to new DFA
+        stateMap[nState->name]= nState;
+    }
+    // Loop over states
+    for (auto fState : states) {
+        // Second loop over states
+        for (auto c : alphabet) {
+            State* oDes = fState->transitions[c][0];
+            fState->transitions[c] = {stateMap[oDes->name]};
+        }
+        // Add state to correct parameters if necessary
+        if (fState->starting)
+            startState = fState;
+        if (fState->accepting)
+            acceptingStates.push_back(fState);
+    }
+    return *this;
 }
 
 //
@@ -648,4 +680,8 @@ void DFA::rename() {
     for (int i = 0; i < states.size(); ++i) {
         states[i]->name = to_string(i);
     }
+}
+
+bool DFA::empty() {
+    return states.empty();
 }
