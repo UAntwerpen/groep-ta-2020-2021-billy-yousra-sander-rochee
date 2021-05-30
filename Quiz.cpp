@@ -163,7 +163,7 @@ void Quiz::selectGame(bool stop) {
         cout << "geef een geldig nummer op" << endl << endl;
         return selectGame();
     }
-    if(nr < 0) {
+    if(nr <= 0) {
         cout << "geef minstens 1 op als aantal" << endl << endl;
         return selectGame();
     }

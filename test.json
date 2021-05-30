@@ -17,6 +17,449 @@
           "renault"
         ]
       ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Pable Neruda?",
+      "antwoorden": [
+        [
+          "Dichter"
+        ],
+        [
+          "Nobelprijs"
+        ],
+        [
+          "il postino"
+        ],
+        [
+          "canto general"
+        ],
+        [
+          "chileen",
+          "chili"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 5 meest populaire korte citytrips in Belgie?",
+      "antwoorden": [
+        [
+          "Rome"
+        ],
+        [
+          "Londen"
+        ],
+        [
+          "Parijs"
+        ],
+        [
+          "Barcelona"
+        ],
+        [
+          "Lissabon"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Christoff De Bolle?",
+      "antwoorden": [
+        [
+          "Zeven zonden"
+        ],
+        [
+          "Zanger"
+        ],
+        [
+          "Schlagermuziek",
+          "schlagerzanger",
+          "schlager"
+        ],
+        [
+          "Duitsland",
+          "duits"
+        ],
+        [
+          "lindsay"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Bee Gees?",
+      "antwoorden": [
+        [
+          "Broers"
+        ],
+        [
+          "staying alive"
+        ],
+        [
+          "gibb"
+        ],
+        [
+          "brits",
+          "engels"
+        ],
+        [
+          "popgroep",
+          "muziekgroep",
+          "groep"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Romeo en Julia?",
+      "antwoorden": [
+        [
+          "balkon"
+        ],
+        [
+          "William",
+          "Shakespeare",
+          "william shakespeare"
+        ],
+        [
+          "verona"
+        ],
+        [
+          "Familievete"
+        ],
+        [
+          "Capulet"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Eva Braun?",
+      "antwoorden": [
+        [
+          "vrouw van hitler",
+          "hitler",
+          "vrouw van",
+          "adolf hitler"
+        ],
+        [
+          "duits"
+        ],
+        [
+          "zelfmoord"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 5 rijkste ketens/franchises ter wereld?",
+      "antwoorden": [
+        [
+          "mac donalds"
+        ],
+        [
+          "burger king"
+        ],
+        [
+          "kfc"
+        ],
+        [
+          "pizza hut"
+        ],
+        [
+          "mariott"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over John coltrane",
+      "antwoorden": [
+        [
+          "jazz"
+        ],
+        [
+          "componist"
+        ],
+        [
+          "alice"
+        ],
+        [
+          "spiritueel"
+        ],
+        [
+          "saxofoon"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over icarus, een figuur uit de Griekst mythologie?",
+      "antwoorden": [
+        [
+          "vleugels"
+        ],
+        [
+          "te dicht bij de zon",
+          "zon"
+        ],
+        [
+          "daedalus"
+        ],
+        [
+          "kreta"
+        ],
+        [
+          "koning minos"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat kan je vertellen over Win Lybaert?",
+      "antwoorden": [
+        [
+          "Liefhebbers"
+        ],
+        [
+          "De columbus"
+        ],
+        [
+          "moestuin van wim"
+        ],
+        [
+          "presentator"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over een man genaamd Pompidou?",
+      "antwoorden": [
+        [
+          "president"
+        ],
+        [
+          "fransman",
+          "frankrijk",
+          "frans"
+        ],
+        [
+          "centre"
+        ],
+        [
+          "de gaulle"
+        ],
+        [
+          "georges"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Cowboy Henk?",
+      "antwoorden": [
+        [
+          "humo"
+        ],
+        [
+          "stripfiguur",
+          "strip"
+        ],
+        [
+          "herr seele"
+        ],
+        [
+          "kamagurka"
+        ],
+        [
+          "kuif"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over de Kreuners?",
+      "antwoorden": [
+        [
+          "ik wil je"
+        ],
+        [
+          "ben crabbe",
+          "ben crabb",
+          "ben"
+        ],
+        [
+          "jan van eyken",
+          "jan"
+        ],
+        [
+          "walter grootaers",
+          "walter"
+        ],
+        [
+          "comeback"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke vruchten zitten in de populairste confituren van Materne? 5 antwoorden verwacht.",
+      "antwoorden": [
+        [
+          "aardbei",
+          "aardbeien"
+        ],
+        [
+          "kers",
+          "kersen"
+        ],
+        [
+          "abrikoos",
+          "abrikozen"
+        ],
+        [
+          "bes",
+          "bessen"
+        ],
+        [
+          "pruim",
+          "pruimen"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Mondriaan",
+      "antwoorden": [
+        [
+          "Nederlander",
+          "Nederlands"
+        ],
+        [
+          "Piet"
+        ],
+        [
+          "schilder"
+        ],
+        [
+          "vlakken",
+          "kleurvlakken"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over tarama?",
+      "antwoorden": [
+        [
+          "Roze",
+          "roos"
+        ],
+        [
+          "visse eitjes",
+          "vissen"
+        ],
+        [
+          "mezze"
+        ],
+        [
+          "turks",
+          "turks voorgerecht",
+          "voorgerecht"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 5 sporttakken met de meeste aangesloten leden in belgie",
+      "antwoorden": [
+        [
+          "voetbal"
+        ],
+        [
+          "basketbal"
+        ],
+        [
+          "tennis"
+        ],
+        [
+          "gymnastiek"
+        ],
+        [
+          "paardensport",
+          "paardrijden",
+          "paard"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Jared Leto?",
+      "antwoorden": [
+        [
+          "acteur"
+        ],
+        [
+          "zanger"
+        ],
+        [
+          "amerikaans",
+          "amerikaan"
+        ],
+        [
+          "oscar"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 5 buurlanden van Argentinie?",
+      "antwoorden": [
+        [
+          "Paraguay"
+        ],
+        [
+          "Uruguay"
+        ],
+        [
+          "Bolivia",
+          "Bolivie",
+          "Bolivi"
+        ],
+        [
+          "chili"
+        ],
+        [
+          "brazilie",
+          "brazili"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Mendeljev?",
+      "antwoorden": [
+        [
+          "periodiek systeem",
+          "tabel"
+        ],
+        [
+          "scheikundige",
+          "chemist"
+        ],
+        [
+          "elementen",
+          "atomen"
+        ],
+        [
+          "rus",
+          "russisch"
+        ],
+        [
+          "Dmitri"
+        ]
+      ]
     }
   ]
 }
