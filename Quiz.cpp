@@ -37,6 +37,19 @@ pair<int, int> Quiz::printFinalResults(vector<pair<int, int>> &totaleScore, bool
     return ret_val;
 }
 
+Quiz::~Quiz() {
+    this->clear();
+}
+
+void Quiz::clear() {
+    for (Vraag* vraag : vragen) {
+        delete vraag;
+    }
+    vragen.clear();
+    modes.clear();
+    resultaten.clear();
+}
+
 void Quiz::addFile(string filename) {
     // inlezen uit file
     std::ifstream input(filename);
@@ -117,7 +130,7 @@ void Quiz::selectGame(bool stop) {
     string mode;
 
     clock_t randomTime = clock();
-    if(stop) {
+    if (stop) {
         cout << "als je het spel wilt beeindigen, type dan het woordje 'stop', Anders:\n";
     }
     cout << "Geef de mode die je wilt spelen op:\n";
@@ -142,9 +155,12 @@ void Quiz::selectGame(bool stop) {
     //maak de eerste lowercase
     string m = toLowerCase(input[0]);
 
-    if(m=="stop") {
+    if (m == "stop") {
         //eventueel hier iets doen met de score
         return this->printAllResults();
+    } else if (m == "clear") {
+        this->clear();
+        selectGame(true);
     }
 
     if (input.size() < 2) {
@@ -155,25 +171,31 @@ void Quiz::selectGame(bool stop) {
     //sla het nummer van de tweede op als int
     bool check = checkInt(input[1]);
     int nr;
-    if(check) {
+    if (check) {
         nr = stoi(input[1]);
         int vraagAmount = vragen.size();
         nr = min(nr, vraagAmount);
+    } else if (m == "add") {
+        addFile(input[1]);
+        return selectGame();
     } else {
         cout << "geef een geldig nummer op" << endl << endl;
-        return selectGame();
+        return selectGame(true);
     }
-    if(nr <= 0) {
+    if (vragen.empty()) {
+        cout << R"(Geen vragen geladen. Voeg vragen toe aan de quiz met 'add' + 'path naar json'.)" << endl;
+        return selectGame(true);
+    } else if(nr <= 0) {
         cout << "geef minstens 1 op als aantal" << endl << endl;
-        return selectGame();
+        return selectGame(true);
     }
 
     int r = roundToInt(((double)(clock() - randomTime)/CLOCKS_PER_SEC)*100);
     if(m == "classic") {
         return this->classicOutput(nr, r, false);
-    } else if(m == "blind") {
+    } else if (m == "blind") {
         return this->blindOutput(nr, r, false);
-    } else if(m == "hardcore") {
+    } else if (m == "hardcore") {
         return this->classicOutput(nr, r, true);
     } else if (m == "killer") {
         return this->blindOutput(nr, r, true);

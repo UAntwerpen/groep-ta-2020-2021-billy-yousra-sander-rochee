@@ -50,6 +50,10 @@ public:
      */
     Quiz(string filename);
 
+    ~Quiz();
+
+    void clear();
+
     void addFile(string filename);
 
     /**
