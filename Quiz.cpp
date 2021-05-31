@@ -140,6 +140,7 @@ bool Quiz::selectGame(bool stop) {
     cout << "Geef de mode die je wilt spelen op:\n";
 
     getline(cin,mode);
+    cout << endl;
     //mode = "classic 3";
 
     //zorg ervoor dat eventuele spaties in het begin er worden uitgehaald

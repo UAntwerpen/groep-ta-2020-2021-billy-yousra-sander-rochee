@@ -16,8 +16,11 @@ using json = nlohmann::json;
 
 
 int main() {
+    string path;
+    cout << "Geef een path naar het te laden quiz json bestand:" << endl;
+    getline(cin, path);
 
-    Quiz q("voorbeeldJson.json");
+    Quiz q(path);
 
     q.startGame();
 
