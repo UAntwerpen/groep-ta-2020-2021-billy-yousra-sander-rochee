@@ -46,8 +46,6 @@ void Quiz::clear() {
         delete vraag;
     }
     vragen.clear();
-    modes.clear();
-    resultaten.clear();
 }
 
 void Quiz::addFile(string filename) {
@@ -122,10 +120,16 @@ void Quiz::startGame() {
     cout << "de verwachtte input is 'Mode'+'aantal vragen':" << endl << "'Classic 5' bijvoorbeeld zal een spel in classic mode starten met 5 vragen" << endl;
     cout << "gekende modi zijn: classic, blind, hardcore, killer (niet hoofdlettergevoelig)" << endl << endl;
 
-    this->selectGame();
+    bool stop = false;
+
+    while (selectGame(stop)) {
+        stop = true;
+    }
+
+    this->printAllResults();
 }
 
-void Quiz::selectGame(bool stop) {
+bool Quiz::selectGame(bool stop) {
     //kies gamemode
     string mode;
 
@@ -157,13 +161,13 @@ void Quiz::selectGame(bool stop) {
 
     if (m == "stop") {
         //eventueel hier iets doen met de score
-        return this->printAllResults();
+        return false;
     } else if (m == "clear") {
         this->clear();
-        selectGame(true);
+        return true;
     } else if (m == "product") {
         useProduct = !useProduct;
-        selectGame(true);
+        return true;
     }
 
     if (input.size() < 2) {
@@ -180,32 +184,32 @@ void Quiz::selectGame(bool stop) {
         nr = min(nr, vraagAmount);
     } else if (m == "add") {
         addFile(input[1]);
-        return selectGame();
+        return true;
     } else {
         cout << "geef een geldig nummer op" << endl << endl;
-        return selectGame(true);
+        return true;
     }
     if (vragen.empty()) {
         cout << R"(Geen vragen geladen. Voeg vragen toe aan de quiz met 'add' + 'path naar json'.)" << endl;
-        return selectGame(true);
-    } else if(nr <= 0) {
+        return true;
+    } else if (nr <= 0) {
         cout << "geef minstens 1 op als aantal" << endl << endl;
-        return selectGame(true);
+        return true;
     }
 
     int r = roundToInt(((double)(clock() - randomTime)/CLOCKS_PER_SEC)*100);
-    if(m == "classic") {
-        return this->classicOutput(nr, r, false);
+    if (m == "classic") {
+        this->classicOutput(nr, r);
     } else if (m == "blind") {
-        return this->blindOutput(nr, r, false);
+        this->blindOutput(nr, r, blindMode);
     } else if (m == "hardcore") {
-        return this->classicOutput(nr, r, true);
+        this->blindOutput(nr, r, hardcoreMode, useProduct);
     } else if (m == "killer") {
-        return this->blindOutput(nr, r, true, useProduct);
+        this->blindOutput(nr, r, killerMode, useProduct);
     } else {
         cout << "de ingegeven modus wordt niet herkend" << endl << endl;
-        return selectGame();
     }
+    return true;
 }
 
 vector<vector<string>> Quiz::stelVraag(int vIndex, pair<int, int> &score) {
@@ -221,7 +225,7 @@ vector<vector<string>> Quiz::stelVraag(int vIndex, pair<int, int> &score) {
     return vraag->checkAntwoord(input, score);
 }
 
-void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
+void Quiz::classicOutput(int aantal, unsigned int randomTime) {
     //cout << "classic mode: enabled" << endl;
 
     //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
@@ -254,11 +258,6 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
         pair<int,int> score;
         vector<vector<string>> missed = stelVraag(r[index], score);
 
-        if (hardcore) {
-            score.first = floor(score.first/score.second);
-            score.second = score.second/score.second;
-        }
-
         cout << "Ontbrekende antwoorden:\n";
         if(missed.empty()) {
             cout << "--> geen" << endl;
@@ -282,16 +281,12 @@ void Quiz::classicOutput(int aantal, unsigned int randomTime, bool hardcore) {
 
     pair<int,int> p = this->printFinalResults(totaleScore, false);
     this->resultaten.push_back(p);
-    if(hardcore) {
-        this->modes.emplace_back("hardcore");
-    } else {
-        this->modes.emplace_back("classic");
-    }
 
-    return this->selectGame(true);
+    this->modes.emplace_back("classic");
+
 }
 
-void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer, bool product) {
+void Quiz::blindOutput(int aantal, unsigned int randomTime, modeTypes mode, bool product) {
     //cout << "blind mode: enabled" << endl;
 
     //maak een set aan die indexwaarden voor de vragenvector bijhoudt.
@@ -350,10 +345,10 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer, bool pr
         pair<int,int> score;
         vraag->checkAntwoord(input, score, product);
 
-        if (killer) {
+        if (mode != blindMode) {
             score.first = floor(score.first / score.second);
             score.second = score.second / score.second;
-            if (score.first == 0)
+            if (score.first == 0 && mode == killerMode)
                 wrongAnswer = true;
         }
 
@@ -365,10 +360,12 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer, bool pr
         stringToPrint.push_back(blind);
     }
 
-    pair<int,int> p = this->printFinalResults(totaleScore, killer);
+    pair<int,int> p = this->printFinalResults(totaleScore, mode == killerMode);
     this->resultaten.push_back(p);
-    if (killer) {
+    if (mode == killerMode) {
         this->modes.emplace_back("killer");
+    } else if (mode == hardcoreMode) {
+        this->modes.emplace_back("hardcore");
     } else {
         this->modes.emplace_back("blind");
     }
@@ -382,5 +379,4 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, bool killer, bool pr
         this->printBlindAnswers(stringToPrint);
     }
     cout << endl;
-    return this->selectGame(true);
 }

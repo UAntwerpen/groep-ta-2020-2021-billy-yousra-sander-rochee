@@ -27,6 +27,8 @@ using json = nlohmann::json;
 //forward declaration
 class Vraag;
 
+enum modeTypes{classicMode, blindMode, hardcoreMode, killerMode};
+
 class Quiz {
     pair<int, int> printFinalResults(vector<pair<int, int>> &totaleScore, bool killer);
 
@@ -66,7 +68,7 @@ public:
      * deze functie start in het begin
      * Van hieruit kan je de mode kiezen die je wil spelen
      */
-    void selectGame(bool stop = false);
+    bool selectGame(bool stop = false);
 
     /**
      * aanroep zal een spel in classic mode starten
@@ -76,7 +78,7 @@ public:
      *
      * Keuze voor hardcore mode waarbij iedere verwachte term in het antwoord moet zitten om de vraag juist te hebben
      */
-    void classicOutput(int aantal, unsigned int randomTime, bool hardcore);
+    void classicOutput(int aantal, unsigned int randomTime);
 
     /**
      * aanroep zal een spel in blind mode starten
@@ -87,7 +89,7 @@ public:
      * het commando print alle vragen met hun juiste antwoorden uit en dan de antwoorden gegeven door de speler
      * het laatste is optioneel
      */
-    void blindOutput(int aantal, unsigned int randomTime, bool killer, bool product = false);
+    void blindOutput(int aantal, unsigned int randomTime, modeTypes mode, bool product = false);
 };
 
 
