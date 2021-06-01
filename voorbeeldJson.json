@@ -331,6 +331,1180 @@
           "Colosseum"
         ]
       ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 objecten verliest men het vaakst op de tram?",
+      "antwoorden": [
+        [
+          "gsm",
+          "telefoon",
+          "smartphone"
+        ],
+        [
+          "computer",
+          "laptop"
+        ],
+        [
+          "geld"
+        ],
+        [
+          "kledij",
+          "kleren"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over de boekenbeurs?",
+      "antwoorden": [
+        [
+          "Antwerpen"
+        ],
+        [
+          "signeren"
+        ],
+        [
+          "expo",
+          "antwerp expo"
+        ],
+        [
+          "november"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wie zijn de 4 evangelisten?",
+      "antwoorden": [
+        [
+          "Marcus"
+        ],
+        [
+          "Lucas"
+        ],
+        [
+          "Johannes"
+        ],
+        [
+          "Matteus",
+          "matte s"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 belangrijkste chocoladdesmaken?",
+      "antwoorden": [
+        [
+          "wit",
+          "witte"
+        ],
+        [
+          "zwart",
+          "zwarte",
+          "puur"
+        ],
+        [
+          "melk",
+          "bruin",
+          "bruine"
+        ],
+        [
+          "noten"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Lorenzo Staelens?",
+      "antwoorden": [
+        [
+          "politicus"
+        ],
+        [
+          "trainer"
+        ],
+        [
+          "lorre"
+        ],
+        [
+          "gouden schoen"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn volgens KUL-onderzoek de eerste 4 woorden waaraan je denkt bij het woord ‘tunnel’?",
+      "antwoorden": [
+        [
+          "licht"
+        ],
+        [
+          "donker"
+        ],
+        [
+          "trein"
+        ],
+        [
+          "auto"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 maanden tellen exact 30 dagen?",
+      "antwoorden": [
+        [
+          "april"
+        ],
+        [
+          "juni"
+        ],
+        [
+          "september"
+        ],
+        [
+          "november"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Lourdes?",
+      "antwoorden": [
+        [
+          "frankrijk"
+        ],
+        [
+          "grot"
+        ],
+        [
+          "maagd maria",
+          "maria"
+        ],
+        [
+          "bedevaart",
+          "bedevaartsoord"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat staat er in de 4 hoeken van een origineel Monopoly-spelbord?",
+      "antwoorden": [
+        [
+          "start"
+        ],
+        [
+          "vrij parkeren"
+        ],
+        [
+          "naar de gevangenis"
+        ],
+        [
+          "gevangenis"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 woorden onthoud je met het ezelsbrugje ‘Nooit oorlog zonder wapens’?",
+      "antwoorden": [
+        [
+          "noord"
+        ],
+        [
+          "oost"
+        ],
+        [
+          "zuid"
+        ],
+        [
+          "west"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 grootste delers van het getal 50?",
+      "antwoorden": [
+        [
+          "5"
+        ],
+        [
+          "10"
+        ],
+        [
+          "25"
+        ],
+        [
+          "50"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "In welke 4 vormen worden speelkaarten ingedeeld (niet dialect)?",
+      "antwoorden": [
+        [
+          "harten"
+        ],
+        [
+          "ruiten"
+        ],
+        [
+          "schoppen"
+        ],
+        [
+          "klaveren"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat krijgen vrouwen het vaakst op Valentijn?",
+      "antwoorden": [
+        [
+          "bloemen"
+        ],
+        [
+          "parfum"
+        ],
+        [
+          "pralines"
+        ],
+        [
+          "lingerie"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Haïti?",
+      "antwoorden": [
+        [
+          "eiland"
+        ],
+        [
+          "aardbeving"
+        ],
+        [
+          "port au prince"
+        ],
+        [
+          "Caraibische Zee",
+          "Cara bische Zee"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Van welk 4 Vlaamse gemeenten begint de naam met ‘Oost’?",
+      "antwoorden": [
+        [
+          "oostende"
+        ],
+        [
+          "oostkamp"
+        ],
+        [
+          "oosterzele"
+        ],
+        [
+          "Oostrozebeke"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Luc Tuymans?",
+      "antwoorden": [
+        [
+          "antwerpen",
+          "antwerpenaar"
+        ],
+        [
+          "schilder"
+        ],
+        [
+          "tate modern"
+        ],
+        [
+          "duur"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat zijn volgens KUL-onderzoek de eerste 4 woorden waaraan je denkt bij het woord ‘geld’?",
+      "antwoorden": [
+        [
+          "rijk"
+        ],
+        [
+          "bank"
+        ],
+        [
+          "euro"
+        ],
+        [
+          "kopen"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Caipirinha?",
+      "antwoorden": [
+        [
+          "alcohol"
+        ],
+        [
+          "limoen"
+        ],
+        [
+          "ijs"
+        ],
+        [
+          "suiker"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "OCMW, waar staan de letters voor?",
+      "antwoorden": [
+        [
+          "openbaar"
+        ],
+        [
+          "centrum"
+        ],
+        [
+          "maatschappelijk"
+        ],
+        [
+          "welzijn"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je nog over Picasso?",
+      "antwoorden": [
+        [
+          "pablo"
+        ],
+        [
+          "schilder"
+        ],
+        [
+          "spanje",
+          "spanjaard"
+        ],
+        [
+          "Guernica"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 5 synoniemen voor ‘grootmoeder’ ken je?",
+      "antwoorden": [
+        [
+          "bomma"
+        ],
+        [
+          "grootje"
+        ],
+        [
+          "moemoe"
+        ],
+        [
+          "oma"
+        ],
+        [
+          "bonmama"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over de slag bij Waterloo in 1815?",
+      "antwoorden": [
+        [
+          "wellington"
+        ],
+        [
+          "nederlaag"
+        ],
+        [
+          "napoleon"
+        ],
+        [
+          "leeuw"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat kan je vertellen over Roodkapje en haar sprookje?",
+      "antwoorden": [
+        [
+          "grootmoeder"
+        ],
+        [
+          "wolf"
+        ],
+        [
+          "bezoek"
+        ],
+        [
+          "opgegeten",
+          "grote mond"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat is rundscarpaccio?",
+      "antwoorden": [
+        [
+          "italiaans"
+        ],
+        [
+          "koud"
+        ],
+        [
+          "rouw"
+        ],
+        [
+          "olijfolie"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Lewis Hamilton?",
+      "antwoorden": [
+        [
+          "formule 1"
+        ],
+        [
+          "brits",
+          "engels"
+        ],
+        [
+          "mclaren"
+        ],
+        [
+          "mercedes"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over het verhaal van de vos en de raaf?",
+      "antwoorden": [
+        [
+          "kaas"
+        ],
+        [
+          "Jean de la Fontaine"
+        ],
+        [
+          "zingen"
+        ],
+        [
+          "fabel"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 meest voorkomende ziektes van de Vlaming op reis?",
+      "antwoorden": [
+        [
+          "verkoudheid"
+        ],
+        [
+          "griep"
+        ],
+        [
+          "huidproblemen"
+        ],
+        [
+          "diarree"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Colombus?",
+      "antwoorden": [
+        [
+          "1492"
+        ],
+        [
+          "christoffel"
+        ],
+        [
+          "italiaan",
+          "italiaans"
+        ],
+        [
+          "santa maria"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 verschillende biljetten heb je nodig om 85 euro te betalen?",
+      "antwoorden": [
+        [
+          "50"
+        ],
+        [
+          "20"
+        ],
+        [
+          "10"
+        ],
+        [
+          "5"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je te vertellen over Jaques Vermeire?",
+      "antwoorden": [
+        [
+          "ddt"
+        ],
+        [
+          "fc de kampioenen"
+        ],
+        [
+          "komiek"
+        ],
+        [
+          "presentator"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Waarvoor staat de letters BBI?",
+      "antwoorden": [
+        [
+          "bijzondere"
+        ],
+        [
+          "belasting"
+        ],
+        [
+          "inspectie"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 gerechtelijke arrondissementen liggen in West-Vlaanderen?",
+      "antwoorden": [
+        [
+          "brugge"
+        ],
+        [
+          "kortrijk"
+        ],
+        [
+          "ieper"
+        ],
+        [
+          "veurne"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over ‘Schild en Vriend’?",
+      "antwoorden": [
+        [
+          "1302"
+        ],
+        [
+          "Brugde metten"
+        ],
+        [
+          "Guldensporenslag"
+        ],
+        [
+          "Wachtwoord"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over het ANC?",
+      "antwoorden": [
+        [
+          "Nelson Mandela"
+        ],
+        [
+          "Zuid Afrika"
+        ],
+        [
+          "African National Congress"
+        ],
+        [
+          "Apartheid"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Michel Pollentier?",
+      "antwoorden": [
+        [
+          "peer"
+        ],
+        [
+          "giro"
+        ],
+        [
+          "wielrenner"
+        ],
+        [
+          "belg",
+          "belgie"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Ken je de 4 verschillende gangen van een paard?",
+      "antwoorden": [
+        [
+          "galop"
+        ],
+        [
+          "Rengalop"
+        ],
+        [
+          "stap"
+        ],
+        [
+          "draf"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat bedoelt men in Spanje met een corrida?",
+      "antwoorden": [
+        [
+          "Stierengevecht"
+        ],
+        [
+          "arena"
+        ],
+        [
+          "matador"
+        ],
+        [
+          "Muleta"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Noem de 4 eerste dagen van de week in het Frans.",
+      "antwoorden": [
+        [
+          "lundi"
+        ],
+        [
+          "mardi"
+        ],
+        [
+          "mercredi"
+        ],
+        [
+          "jeudi"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 ingredienten heb je nodig om bechamelsaus te bereiden?",
+      "antwoorden": [
+        [
+          "melk"
+        ],
+        [
+          "bloem"
+        ],
+        [
+          "Nootmuskaat"
+        ],
+        [
+          "boter"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Als 1 mei een donderdag is, welke meidagen zijn dan ook donderdagen?",
+      "antwoorden": [
+        [
+          "8",
+          "8 mei"
+        ],
+        [
+          "15",
+          "15 mei"
+        ],
+        [
+          "22",
+          "22 mei"
+        ],
+        [
+          "29",
+          "29 mei"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Welke taken haten mannen het meest in het huishouden?",
+      "antwoorden": [
+        [
+          "kuisen",
+          "poetsen"
+        ],
+        [
+          "stofzuigen"
+        ],
+        [
+          "boodschappen doen",
+          "boodschappen"
+        ],
+        [
+          "strijken"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke getallen tussen 20 en 80 zijn deelbaar door 15?",
+      "antwoorden": [
+        [
+          "30"
+        ],
+        [
+          "45"
+        ],
+        [
+          "60"
+        ],
+        [
+          "75"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Patrick Dewael?",
+      "antwoorden": [
+        [
+          "Open Vld"
+        ],
+        [
+          "Tongeren"
+        ],
+        [
+          "Greet Op de Beeck"
+        ],
+        [
+          "Burgemeester"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 meest westelijk geleden hoofdsteden van Europa?",
+      "antwoorden": [
+        [
+          "Madrid"
+        ],
+        [
+          "Reykjavik"
+        ],
+        [
+          "Lissabon"
+        ],
+        [
+          "Dublin"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "MIVB, waar staan de letters voor?",
+      "antwoorden": [
+        [
+          "Maatschappij"
+        ],
+        [
+          "Intercommunaal"
+        ],
+        [
+          "Vervoer"
+        ],
+        [
+          "Brussel"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 meest gebruikte synoniemen voor ‘droom’?",
+      "antwoorden": [
+        [
+          "waan"
+        ],
+        [
+          "nachtmerrie"
+        ],
+        [
+          "illusie"
+        ],
+        [
+          "visioen"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Welke 4 types van olie gebruik je het vaakst bij het koken?",
+      "antwoorden": [
+        [
+          "Olijfolie"
+        ],
+        [
+          "Zonnebloemolie"
+        ],
+        [
+          "Arachideolie"
+        ],
+        [
+          "Sesamolie"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Pina Colada?",
+      "antwoorden": [
+        [
+          "Rum"
+        ],
+        [
+          "Longdrink"
+        ],
+        [
+          "Ananassap"
+        ],
+        [
+          "Kokosmelk"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Gianni Versace?",
+      "antwoorden": [
+        [
+          "vermoord"
+        ],
+        [
+          "mode",
+          "modekoning"
+        ],
+        [
+          "italiaan",
+          "italiaans",
+          "italie",
+          "itali"
+        ],
+        [
+          "Donatella"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je van de Rococo?",
+      "antwoorden": [
+        [
+          "Stijlperiode"
+        ],
+        [
+          "Frankrijk"
+        ],
+        [
+          "Barok"
+        ],
+        [
+          "Louis 15",
+          "Louis XV"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Parijs?",
+      "antwoorden": [
+        [
+          "Eifeltoren"
+        ],
+        [
+          "Frankrijk"
+        ],
+        [
+          "Louvre"
+        ],
+        [
+          "Seine"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over de man die Churchill heet?",
+      "antwoorden": [
+        [
+          "Winston"
+        ],
+        [
+          "premier"
+        ],
+        [
+          "brits",
+          "engels"
+        ],
+        [
+          "tweede wereldoorlog",
+          "WOII"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn onze 4 grootste organen?",
+      "antwoorden": [
+        [
+          "lever"
+        ],
+        [
+          "huid"
+        ],
+        [
+          "longen"
+        ],
+        [
+          "darmen"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat weet je over Cleopatra?",
+      "antwoorden": [
+        [
+          "Egypte"
+        ],
+        [
+          "Neus"
+        ],
+        [
+          "Farao"
+        ],
+        [
+          "Julius Caesar",
+          "Caesar"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Geef de 4 populairste vleesvervangers.",
+      "antwoorden": [
+        [
+          "tofoe",
+          "tofu"
+        ],
+        [
+          "quorn"
+        ],
+        [
+          "tempeh",
+          "tempe",
+          "temp"
+        ],
+        [
+          "seitan"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Wat is Wall Street?",
+      "antwoorden": [
+        [
+          "new york"
+        ],
+        [
+          "beurs"
+        ],
+        [
+          "film"
+        ],
+        [
+          "dow jones"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Waar staan bij kleurendruk de letter ‘CMYK’ voor?",
+      "antwoorden": [
+        [
+          "cyan"
+        ],
+        [
+          "magenta"
+        ],
+        [
+          "yellow"
+        ],
+        [
+          "key"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Waarover liegt men op datingsites het meest?",
+      "antwoorden": [
+        [
+          "roken",
+          "rookgedrag"
+        ],
+        [
+          "leeftijd"
+        ],
+        [
+          "gewicht",
+          "massa"
+        ],
+        [
+          "studies"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Welke priemgetallen worden met één cijfer geschreven?",
+      "antwoorden": [
+        [
+          "2",
+          "twee"
+        ],
+        [
+          "3",
+          "drie"
+        ],
+        [
+          "5",
+          "vijf"
+        ],
+        [
+          "7",
+          "zeven"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Vier opeenvolgende cijfers zijn samen 22? Welke zijn het?",
+      "antwoorden": [
+        [
+          "4"
+        ],
+        [
+          "5"
+        ],
+        [
+          "6"
+        ],
+        [
+          "7"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Uit welke 4 componenten is de Belgische krijgsmacht opgebouwd?",
+      "antwoorden": [
+        [
+          "Landmacht"
+        ],
+        [
+          "Zeemacht"
+        ],
+        [
+          "Luchtmacht"
+        ],
+        [
+          "Medische component"
+        ]
+      ]
+    },
+    {
+      "type": "oplijsting",
+      "vraag": "Wat zijn de 4 grootste steden van Limburg?",
+      "antwoorden": [
+        [
+          "Hasselt"
+        ],
+        [
+          "Genk"
+        ],
+        [
+          "Beringen"
+        ],
+        [
+          "Sint Truiden"
+        ]
+      ]
+    },
+    {
+      "type": "open",
+      "vraag": "Uit welke lettergrepen bestaat het woord ‘examentijd'?",
+      "antwoorden": [
+        [
+          "exa"
+        ],
+        [
+          "men"
+        ],
+        [
+          "tijd"
+        ]
+      ]
     }
   ]
 }
