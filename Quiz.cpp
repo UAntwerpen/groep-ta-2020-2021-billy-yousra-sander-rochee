@@ -334,6 +334,7 @@ void Quiz::blindOutput(int aantal, unsigned int randomTime, modeTypes mode, bool
             }
             expected.pop_back();expected+=",  ";
         }
+        expected.pop_back(); expected.pop_back(); expected.pop_back();
         blind.push_back(expected);
 
         getline(cin, input);
